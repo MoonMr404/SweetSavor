@@ -15,15 +15,21 @@ import java.io.IOException;
 public class AddToCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productName = request.getParameter("productName");
-        String productPrice = request.getParameter("productPrice");
-        String productImage = request.getParameter("productImage");
+        // Ottieni i parametri dalla richiesta
+        String productName = request.getParameter("nomeProdotto");
+        String productPriceStr = request.getParameter("prezzo");
+        byte[] productImageBytes = request.getParameter("img").getBytes(); // Ottieni i byte dell'immagine
+
+        // Converti il prezzo in double
+        double productPrice = Double.parseDouble(productPriceStr);
 
         // Creazione dell'oggetto Prodotto con i dettagli ricevuti dalla richiesta
         Prodotto prodotto = new Prodotto();
         prodotto.setNomeProdotto(productName);
-        prodotto.setPrezzo(Double.parseDouble(productPrice));
-        prodotto.setImg(productImage.getBytes());
+        prodotto.setPrezzo(productPrice);
+
+        // Assegna i byte dell'immagine al prodotto
+        prodotto.setImg(productImageBytes);
 
         // Recupero o creazione del carrello dalla sessione dell'utente
         HttpSession session = request.getSession();
