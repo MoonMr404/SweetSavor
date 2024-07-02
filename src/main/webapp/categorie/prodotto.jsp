@@ -64,7 +64,7 @@
                 </div>
 
                 <p>Descrizione: <%= prodotto.getDescrizione() %></p>
-                <form action="#">
+                <form action="<%= request.getContextPath() %>/addToCartServlet" method="post">
                     <button id="buy-button" onclick="addToCart()">Aggiungi al carrello</button>
                 </form>
             </div>
