@@ -19,8 +19,7 @@ a {
 /* Product list */
 .main-home-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: end;
 }
 
 .main-product-item {

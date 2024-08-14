@@ -4,6 +4,18 @@
 <%@ page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%
+    // Istanziazione del DAO e recupero della lista di prodotti
+    ArrayList<Prodotto> listaProdotti = null;
+    ProdottoDao prodottoDao = new ProdottoDao();
+
+    try {
+        listaProdotti = prodottoDao.doRetrieveAll(); // Recupera tutti i prodotti
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,43 +28,29 @@
         <%@include file="/CSS/fragments.css" %>
     </style>
     <script src="<%= request.getContextPath() %>/Javascript/loginStatus.js"></script>
+</head>
 <body>
 
 <%@include file="/fragments/header.jsp" %>
 
 <div class="home-container">
-
     <h1 class="home-header">I NOSTRI PRODOTTI</h1>
-    <!-- Showcase prodotti di categoria cioccolata -->
-    <%
-        ArrayList<Prodotto> listaCioccolata = null;
-        ProdottoDao prodottoDao = new ProdottoDao();
-
-        try {
-            listaCioccolata = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera prodotti categoria cioccolata
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Mostra i prodotti di categoria cioccolata
-        if (listaCioccolata != null && !listaCioccolata.isEmpty()) {
-            for (Prodotto prodotto : listaCioccolata) {
-    %>
-
-        <div class="main-product-item">
-            <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
-                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
-                <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
-                <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
-            </a>
-            <button class="main-add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
-        </div>
-    
-    <%
-            }
-        }
-    %>
-    
+    <div class="main-home-container">
+        <% if (listaProdotti != null && !listaProdotti.isEmpty()) { %>
+            <% for (Prodotto prodotto : listaProdotti) { %>
+                <div class="main-product-item">
+                    <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
+                        <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+                        <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
+                        <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
+                    </a>
+                    <button class="main-add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
+                </div>
+            <% } %>
+        <% } else { %>
+            <p class="main-no-products">Nessun prodotto disponibile</p>
+        <% } %>
+    </div>
 </div>
 
 <%@include file="/fragments/footer.jsp" %>
