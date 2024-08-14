@@ -8,24 +8,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <%@include file="/fragments/header.jsp" %>
+    <style><%@include file="/CSS/fragments.css" %></style>
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="../CSS/productpage.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productpage.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/54779b1c8e.js" crossorigin="anonymous"></script>
+    <script src="/Javascript/commands.js"></script>
 </head>
 <body>
-<%@include file="/fragments/header.jsp" %>
-<style><%@include file="/CSS/fragments.css"%></style>
 
-<main>
-    <h1 class="home-header">Scopri la nostra vasta selezione di tè!</h1>
-    <div class="home-container">
+<main class="main-page">
+    <div class="main-home-container">
         <!-- Showcase prodotti -->
         <%
             ArrayList<Prodotto> lista = null;
             ProdottoDao prodottoDao = new ProdottoDao();
-
+        
             try {
                 lista = prodottoDao.doRetrieveByCategoria("te"); // Recupera tutti i prodotti
             } catch (Exception e) {
@@ -36,19 +36,19 @@
                 for (Prodotto prodotto : lista) {
         %>
 
-        <div class="product-item">
-            <a href="<%= request.getContextPath() %>/prodotto?nome=<%= URLEncoder.encode(prodotto.getNomeProdotto(), "UTF-8") %>">
-                <img src="data:image/jpeg;base64, <%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="productImage" />
-                <p><%= prodotto.getNomeProdotto() %></p>
-                <p><%= prodotto.getPrezzo() %>&euro;</p>
-                <button class="add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
+        <div class="main-product-item">
+            <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
+                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+                <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
+                <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
             </a>
+            <button class="main-add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
         </div>
         <%
             }
         } else {
         %>
-        <p>Nessun prodotto disponibile al momento.</p>
+        <p class="main-no-products">Nessun prodotto disponibile al momento.</p>
         <%
             }
         %>

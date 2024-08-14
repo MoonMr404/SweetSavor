@@ -10,6 +10,7 @@
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productpage.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         <%@include file="/CSS/fragments.css" %>
@@ -21,16 +22,14 @@
 
 <div class="home-container">
 
-    <h1 class="home-header">GLI ULTIMI PRODOTTI</h1>
+    <h1 class="home-header">I NOSTRI PRODOTTI</h1>
     <!-- Showcase prodotti di categoria cioccolata -->
     <%
         ArrayList<Prodotto> listaCioccolata = null;
-        ArrayList<Prodotto> listaTisane = null;
         ProdottoDao prodottoDao = new ProdottoDao();
 
         try {
             listaCioccolata = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera prodotti categoria cioccolata
-            listaTisane = prodottoDao.doRetrieveByCategoria("tisana"); // Recupera prodotti categoria tisana
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,34 +38,21 @@
         if (listaCioccolata != null && !listaCioccolata.isEmpty()) {
             for (Prodotto prodotto : listaCioccolata) {
     %>
-    <div class="image-container">
-        <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%= prodotto.getNomeProdotto() %>">
-            <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
-            <p><%= prodotto.getNomeProdotto() %></p>
-        </a>
-    </div>
+
+        <div class="main-product-item">
+            <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
+                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+                <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
+                <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
+            </a>
+            <button class="main-add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
+        </div>
+    
     <%
             }
         }
     %>
-
-    <h1 class="home-header">LE NUOVE TISANE</h1>
-    <%
-        // Mostra i prodotti di categoria tisana
-        if (listaTisane != null && !listaTisane.isEmpty()) {
-            for (Prodotto prodotto : listaTisane) {
-    %>
-    <div class="image-container">
-        <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%= prodotto.getNomeProdotto() %>">
-            <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
-            <p><%= prodotto.getNomeProdotto() %></p>
-        </a>
-    </div>
-    <%
-            }
-        }
-    %>
-
+    
 </div>
 
 <%@include file="/fragments/footer.jsp" %>

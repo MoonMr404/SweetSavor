@@ -40,6 +40,8 @@ public class ProdottoDao implements ProdottoDaoInterface {
 
     @Override
     public ArrayList<Prodotto> doRetrieveByCategoria(String categoria) throws SQLException {
+        
+        
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

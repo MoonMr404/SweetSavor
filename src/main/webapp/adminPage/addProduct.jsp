@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
             <label for="productImage">Aggiungi Immagine </label>
-            <input type="file" id="productImage" name="img" class="file-input" required>
+            <input type="file" id="productImage" name="img" class="file-input" alt="Err_Img" required>
         </div>
         <div class="form-group">
             <button type="submit" class="custom-file-button">Aggiungi Prodotto</button>
