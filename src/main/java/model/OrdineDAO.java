@@ -11,9 +11,9 @@ public class OrdineDAO implements OrdineDAOInterface {
     private static final String UPDATE_ORDINE_SQL = "UPDATE Ordini SET dataOrdine = ?, nomeCliente = ?, cognomeCliente = ?, cap = ?, indirizzoDiConsegna = ?, totale = ?, stato = ? WHERE orderID = ?";
 
     protected Connection getConnection() {
-        String jdbcURL = "jdbc:mysql://localhost:3306/SweetSavor";
+        String jdbcURL = "jdbc:mysql://localhost:3306/SweetAndSavor";
         String jdbcUsername = "root";
-        String jdbcPassword = "root";
+        String jdbcPassword = "Francesco004";
 
         Connection connection = null;
         try {

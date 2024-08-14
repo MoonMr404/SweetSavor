@@ -1,3 +1,4 @@
+<%@ page import="model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -6,6 +7,13 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+
+<%
+  User user = new User();
+  
+  
+  
+%>
 <header>
   <div class="logo-container">
     <img id="cup" src="<%= request.getContextPath() %>/logo/SweetSavor.png" width="150" alt="SweetSavor Logo">
@@ -30,7 +38,7 @@
       <li><a href="<%= request.getContextPath() %>/common/login.jsp">Login<i class='bx bxs-user' id="accBox"></i></a></li>
       <% } %>
       <div class="cart-icon">
-        <a href="<%= request.getContextPath() %>/common/cart.jsp"><i class='bx bx-cart-add'></i></a>
+        <li><a href="<%= request.getContextPath() %>/common/cart.jsp">Carrello<i class='bx bx-cart-add'></i></a></li>
       </div>
     </ul>
   </ul>

@@ -63,8 +63,11 @@
     display: inline;
 }
 
+.cart-icon{
+    font-size: 20px;
+}
 .cart-icon a {
-    font-size: larger;
+    
     color: black;
     text-decoration: none;
 }
