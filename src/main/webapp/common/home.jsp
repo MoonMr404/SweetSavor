@@ -22,10 +22,13 @@
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productpage.css">
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         <%@include file="/CSS/fragments.css" %>
+        <%@include file="/CSS/productpage.css" %>
+
+        /*<link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productpage.css">*/
     </style>
     <script src="<%= request.getContextPath() %>/Javascript/loginStatus.js"></script>
 </head>
@@ -40,7 +43,7 @@
             <% for (Prodotto prodotto : listaProdotti) { %>
                 <div class="main-product-item">
                     <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
-                        <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+                        <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150" >
                         <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
                         <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
                     </a>

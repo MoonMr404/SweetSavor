@@ -20,7 +20,8 @@
     ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) request.getSession().getAttribute("listaProdotti");
     Integer totalProdotti = (Integer) request.getAttribute("totalProdotti");
     Double totalImporto = (Double) request.getAttribute("totalImporto");
-%>
+    
+%>  
 
 <div class="cart-container">
     <%
@@ -30,7 +31,7 @@
     <div class="product-list" id="cart-list">
         <h2>Carrello</h2>
 
-        <form id="cart-form" action="<%= request.getContextPath() %>/gestioneCarrello" method="post">
+        <form id="cart-form" action="<%= request.getContextPath() %>/CartServlet" method="post">
             <% for (int i = 0; i < listaProdotti.size(); i++) { %>
             <div class="product-item">
                 <div class="image-box">
@@ -58,7 +59,7 @@
             <h2>Riepilogo Ordine</h2>
             <p>Totale Prodotti: <%= totalProdotti %></p>
             <p>Totale Importo: €<%= totalImporto %></p>
-            <a href="checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
+            <a href="<%= request.getContextPath() %>/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
         </div>
     </div>
     <% } else { %>

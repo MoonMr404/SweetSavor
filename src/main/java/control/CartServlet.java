@@ -27,19 +27,7 @@ public class CartServlet {
                 listaProdotti = new ArrayList<Prodotto>();
             }
 
-            // Creazione del prodotto da aggiungere (per esempio)
-            Prodotto prodotto = new Prodotto(
-                    "Laptop",            // nomeProdotto
-                    "Laptop 15 pollici", // descrizione
-                    999.99,              // prezzo
-                    10,                  // disponibilita
-                    true,                // disponibile
-                    "Cioccolata",        // categoria
-                    null                 // img
-            );
-
-            // Aggiungi il prodotto alla lista
-            listaProdotti.add(prodotto);
+           
 
             // Calcola i totali
             int totalProdotti = listaProdotti.size();
