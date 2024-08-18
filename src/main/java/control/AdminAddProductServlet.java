@@ -62,6 +62,8 @@ public class AdminAddProductServlet extends HttpServlet {
                 // Salva il prodotto usando il DAO
                 prodottoDao.doSave(prodotto);
                 
+                
+                //Manda un alerta ad un  file js 
                 // Messaggio da mostrare in JavaScript dopo l'aggiornamento
                 String message = "Prodotto aggiunto con successo";
 
