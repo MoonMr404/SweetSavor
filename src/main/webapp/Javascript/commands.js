@@ -50,14 +50,10 @@ function validateLoginForm() {
 
 //funzione  per addToCart
 function addToCart() {
-    // Ottenere la quantità selezionata dall'utente
-    var quantity = document.getElementById("buy-button").value;
+    const productName = "<%= prodotto..getNomeProdotto() %>";
+    const url = `./CartInteraction?action=addProdotto&name=${productName}&page=prodotto.jsp`;
 
-    // Impostare il valore della quantità nel campo del form
-    document.getElementById("buy-button").value = quantity;
-
-    // Invia il form
-    document.forms[0].submit(); // Assicurati che il form sia il primo nel tuo documento se hai più form
+    window.location.href = url;
 }
 
 

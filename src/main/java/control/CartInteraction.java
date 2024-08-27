@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet("/addToCartServlet")
-public class AddToCartServlet extends HttpServlet {
+@WebServlet("/CartInteraction")
+public class CartInteraction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Recupera i parametri dal form
         String productName = request.getParameter("nome");

@@ -14,7 +14,7 @@
 <div class="card section">
     <h2>Aggiungi Prodotti</h2>
 
-    <form action="../addProduct" method="post" enctype="multipart/form-data">
+    <form action="<%= request.getContextPath() %>/addProduct" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="productName">Nome Prodotto:</label>
             <input type="text" id="productName" name="nomeProdotto" required>

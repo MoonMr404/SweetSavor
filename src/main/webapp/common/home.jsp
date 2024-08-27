@@ -22,13 +22,11 @@
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
-    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         <%@include file="/CSS/fragments.css" %>
-        <%@include file="/CSS/productpage.css" %>
 
-        /*<link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productpage.css">*/
+        
     </style>
     <script src="<%= request.getContextPath() %>/Javascript/loginStatus.js"></script>
 </head>

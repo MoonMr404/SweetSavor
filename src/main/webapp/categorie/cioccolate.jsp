@@ -2,20 +2,21 @@
 <%@ page import="model.Prodotto" %>
 <%@ page import="model.ProdottoDao" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.net.URLEncoder" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <%@include file="/fragments/header.jsp" %>
-    <style><%@include file="/CSS/fragments.css" %></style>
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/prodotto.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productPage.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/54779b1c8e.js" crossorigin="anonymous"></script>
-    <script src="/Javascript/commands.js"></script>
+    <style>
+        <%@include file="/CSS/fragments.css" %>
+    </style>
+    <script src="<%= request.getContextPath() %>/Javascript/commands.js"></script>
 </head>
 <body>
 

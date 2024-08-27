@@ -1,5 +1,5 @@
 <%@ page import="model.User" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="initial-scale=1, width=device-width">
