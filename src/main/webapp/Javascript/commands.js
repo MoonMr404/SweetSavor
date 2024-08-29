@@ -48,13 +48,6 @@ function validateLoginForm() {
 
 
 
-//funzione  per addToCart
-function addToCart() {
-    const productName = "<%= prodotto..getNomeProdotto() %>";
-    const url = `./CartInteraction?action=addProdotto&name=${productName}&page=prodotto.jsp`;
-
-    window.location.href = url;
-}
 
 
 document.addEventListener("DOMContentLoaded", function() {

@@ -24,12 +24,15 @@ public class Cart {
     }
     
     public void addProdotto(Prodotto prodotto){
+
         listaProdotti.add(prodotto);
     }
-    
-    
-    
-    
+
+
+
+
+
+
     public double getTotalPrice(){
         double total = 0;
         

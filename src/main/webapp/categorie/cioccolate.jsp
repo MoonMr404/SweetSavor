@@ -10,7 +10,8 @@
     <%@include file="/fragments/header.jsp" %>
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productPage.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/chocoPage.css">
+<%--    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productPage.css">--%>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/54779b1c8e.js" crossorigin="anonymous"></script>
     <style>
@@ -24,12 +25,32 @@
     <div class="main-home-container">
         <!-- Showcase prodotti -->
         <%
+
+
+            String nomeProdotto = "Cioccolato Fondente";
+            String descrizione = "Delizioso cioccolato fondente al 70% di cacao.";
+            double prezzo = 2.99;
+            int disponibilita = 100;
+            boolean disponibile = true;
+            String categoria = "cioccolata";
+
+
+
+            Prodotto cioccolatoFondente = new Prodotto(nomeProdotto, descrizione, prezzo, disponibilita, disponibile, categoria, null);
+
+
+
+
             ArrayList<Prodotto> lista = null;
+            lista = new ArrayList();
+            lista.add(cioccolatoFondente);
             ProdottoDao prodottoDao = new ProdottoDao();
 
 
+
             try {
-                lista = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera tutti i prodotti
+//                lista = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera tutti i prodotti
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -40,7 +61,7 @@
 
         <div class="main-product-item">
             <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
-                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+<%--                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150" alt="immagine non disponibile">--%>
                 <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
                 <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
             </a>

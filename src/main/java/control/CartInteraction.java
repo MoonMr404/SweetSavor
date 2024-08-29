@@ -15,26 +15,13 @@ import java.util.ArrayList;
 
 @WebServlet("/CartInteraction")
 public class CartInteraction extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Recupera i parametri dal form
+        // Recupera il nome del prodotto dal form
         String productName = request.getParameter("nome");
-        String quantityStr = request.getParameter("quantity");
-
-        // Verifica se quantityStr è null o vuoto
-        if (quantityStr == null || quantityStr.trim().isEmpty()) {
-            // Gestione errore: quantità non specificata
-            response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
-            return;
-        }
-
-        int quantity = 0;
-        try {
-            quantity = Integer.parseInt(quantityStr);
-        } catch (NumberFormatException e) {
-            // Gestione errore: quantità non è un numero valido
-            response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
-            return;
-        }
 
         // Recupera il prodotto dal database
         ProdottoDao prodottoDao = new ProdottoDao();
@@ -42,15 +29,9 @@ public class CartInteraction extends HttpServlet {
         try {
             prodotto = prodottoDao.doRetrieveByName(productName);
         } catch (SQLException e) {
-            throw new ServletException(e);
+            throw new RuntimeException(e);
         }
 
-        // Verifica se il prodotto esiste
-        if (prodotto == null) {
-            // Prodotto non trovato, gestione dell'errore
-            response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
-            return;
-        }
 
         // Aggiungi il prodotto al carrello dell'utente
         HttpSession session = request.getSession();
@@ -65,19 +46,19 @@ public class CartInteraction extends HttpServlet {
         boolean found = false;
         for (Prodotto p : cart) {
             if (p.getNomeProdotto().equals(prodotto.getNomeProdotto())) {
-                p.setDisponibility(p.getDisponibility() + quantity); // Aggiorna la quantità se il prodotto è già nel carrello
+                // Se il prodotto è già nel carrello, aggiorna solo la quantità (opzionale)
+                // prodotto.setDisponibility(p.getDisponibility() + 1); // Aggiungi una logica se desideri aggiornare la quantità
                 found = true;
                 break;
             }
         }
 
-        // Se il prodotto non è già nel carrello, aggiungilo con la quantità specificata
+        // Se il prodotto non è già nel carrello, aggiungilo
         if (!found) {
-            prodotto.setDisponibility(quantity);
             cart.add(prodotto);
         }
 
         // Reindirizza alla pagina del carrello
-        response.sendRedirect(request.getContextPath() + "/cart.jsp");
+        response.sendRedirect(request.getContextPath() + "/common/cart.jsp");
     }
 }
