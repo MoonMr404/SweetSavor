@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class ProdottoDao implements ProdottoDaoInterface {
 
-    private String jdbcURL = "jdbc:mysql://localhost:3306/SweetSavor";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/SweetAndSavor";
     private String dbUser = "root";
-    private String dbPassword = "root";
+    private String dbPassword = "Francesco004";
 
     static {
         try {
@@ -40,6 +40,8 @@ public class ProdottoDao implements ProdottoDaoInterface {
 
     @Override
     public ArrayList<Prodotto> doRetrieveByCategoria(String categoria) throws SQLException {
+        
+        
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

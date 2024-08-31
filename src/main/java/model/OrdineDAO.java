@@ -3,19 +3,17 @@ package model;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 public class OrdineDAO implements OrdineDAOInterface {
     private static final String INSERT_ORDINE_SQL = "INSERT INTO Ordini (orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ORDINE_BY_ID = "SELECT orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato FROM Ordini WHERE orderID = ?";
-    private static final String SELECT_ALL_ORDINI = "SELECT * FROM Ordini";
+    private static final String SELECT_ALL_ORDINI = "SELECT orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato FROM Ordini";
     private static final String DELETE_ORDINE_SQL = "DELETE FROM Ordini WHERE orderID = ?";
     private static final String UPDATE_ORDINE_SQL = "UPDATE Ordini SET dataOrdine = ?, nomeCliente = ?, cognomeCliente = ?, cap = ?, indirizzoDiConsegna = ?, totale = ?, stato = ? WHERE orderID = ?";
 
     protected Connection getConnection() {
-        // Assicurati di sostituire queste variabili con le tue impostazioni del database
-        String jdbcURL = "jdbc:mysql://localhost:3306/SweetSavor";
+        String jdbcURL = "jdbc:mysql://localhost:3306/SweetAndSavor";
         String jdbcUsername = "root";
-        String jdbcPassword = "root";
+        String jdbcPassword = "Francesco004";
 
         Connection connection = null;
         try {

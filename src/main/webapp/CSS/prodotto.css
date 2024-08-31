@@ -30,10 +30,13 @@ body {
 }
 
 .image-box {
-    position: relative;
-    text-align: center;
+    margin-bottom: 150px;
     display: flex;
-    justify-content: flex-end;
+    border-radius: 50px;
+    top: 20px; /* Modifica la posizione in base alle tue esigenze */
+    left: 10px; /* Modifica la posizione in base alle tue esigenze */
+    width: 100%; /* Assicurati che abbia una larghezza adeguata */
+    height: auto; /* Assicurati che abbia un'altezza adeguata */
 }
 
 .user-box {
@@ -102,6 +105,7 @@ body {
 .product-description p {
     margin: 10px 0;
     font-size: 16px;
+
 }
 
 @media (max-width: 768px) {

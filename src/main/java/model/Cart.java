@@ -4,44 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Prodotto> listaProdotti;
-    private int totaleCarrello;
-
-    public Cart() {
-        listaProdotti = new ArrayList<>();
+    private ArrayList<Prodotto> listaProdotti;
+    
+    public Cart(){
+        listaProdotti = new ArrayList<Prodotto>();
     }
-
-    public List<Prodotto> getListaProdotti() {
+    
+    public boolean isEmpty(){
+        return listaProdotti.isEmpty();
+    }
+    
+    public List<Prodotto> getListaProdotti(){
         return listaProdotti;
     }
+    
+    
+    public void rimuoviProdotto(Prodotto p){
+        listaProdotti.remove(p);
+    }
+    
+    public void addProdotto(Prodotto prodotto){
 
-    public void addProdotto(Prodotto prodotto) {
-        // Verifica se il prodotto è già presente nel carrello
-        for (Prodotto p : listaProdotti) {
-            if (p.equals(prodotto)) {
-                // Se il prodotto è già presente, incrementa la quantità e aggiorna il totale
-                p.setDisponibility(p.getDisponibility() + 1);
-                return; // Esci dal metodo una volta incrementata la quantità
-            }
-        }
-
-        // Se il prodotto non è presente nel carrello, aggiungilo
         listaProdotti.add(prodotto);
     }
 
-    public void removeProdotto(Prodotto prodotto) {
-        listaProdotti.remove(prodotto);
-    }
 
-    public double getTotalPrize() {
+
+
+
+
+    public double getTotalPrice(){
         double total = 0;
-        for (Prodotto prodotto : listaProdotti) {
-            total += prodotto.getPrezzo() * prodotto.getDisponibility();
+        
+        for(Prodotto prodotto : listaProdotti){
+            total += prodotto.getPrezzo();
         }
         return total;
-    }
-
-    public boolean isEmpty() {
-        return listaProdotti.isEmpty();
     }
 }

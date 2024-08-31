@@ -1,10 +1,14 @@
-<%@ page import="model.Cart" %>
 <%@ page import="model.Prodotto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.Cart" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+
+<%
+    Cart cart = (Cart) request.getSession().getAttribute("cart");
+%>
+<head>x
     <title>Checkout</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="initial-scale=1, width=device-width">
@@ -74,7 +78,7 @@
     <div class="order-summary">
         <h2>Riepilogo Ordine</h2>
         <% 
-            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            
             if(cart != null && !cart.isEmpty()) {
                 List<Prodotto> listaProdotti = cart.getListaProdotti();
         %>
@@ -84,7 +88,7 @@
             <% } %>
         </ul>
         <p>Totale Prodotti: <%= listaProdotti.size() %></p>
-        <p>Totale Importo: €<%= cart.getTotalPrize() %></p>
+        <p>Totale Importo: €<%= cart.getTotalPrice() %></p>
         <% } else { %>
             <p>Il carrello è vuoto.</p>
         <% } %>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.Prodotto" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Prodotto" %>
+<%@ page import="model.ProdottoDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,10 @@
     <h2>Modifica Prodotto</h2>
 
     <%
+        // Ottieni la lista dei prodotti dalla sessione
         ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) request.getSession().getAttribute("products");
+
+        // Itera su ogni prodotto per mostrare il form di modifica
         for (Prodotto prodotto : prodotti) {
     %>
     <form action="<%= request.getContextPath() %>/AdminModifyProductServlet" method="post">
@@ -33,6 +37,7 @@
             <p>Quantità:</p>
             <p><input type="number" name="quantita" value="<%= prodotto.getDisponibility() %>" required></p>
         </div>
+
         <div class="tableRow">
             <p>Immagine:</p>
             <p><input type="text" name="img" value="<%= prodotto.getImg() %>" required></p>
@@ -42,6 +47,7 @@
             <p>Categoria:</p>
             <p><input type="text" name="categoria" value="<%= prodotto.getCategoria() %>"></p>
         </div>
+        
         <div class="tableRow">
             <p></p>
             <p><input type="submit" value="Modifica Prodotto"></p>

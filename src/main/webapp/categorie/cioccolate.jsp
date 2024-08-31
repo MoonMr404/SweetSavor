@@ -2,20 +2,22 @@
 <%@ page import="model.Prodotto" %>
 <%@ page import="model.ProdottoDao" %>
 <%@ page import="java.util.Base64" %>
-<%@ page import="java.net.URLEncoder" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <%@include file="/fragments/header.jsp" %>
-    <style><%@include file="/CSS/fragments.css" %></style>
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="../CSS/productpage.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/chocoPage.css">
+<%--    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productPage.css">--%>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/54779b1c8e.js" crossorigin="anonymous"></script>
-    <script src="/Javascript/commands.js"></script>
+    <style>
+        <%@include file="/CSS/fragments.css" %>
+    </style>
+    <script src="<%= request.getContextPath() %>/Javascript/commands.js"></script>
 </head>
 <body>
 
@@ -23,12 +25,32 @@
     <div class="main-home-container">
         <!-- Showcase prodotti -->
         <%
+
+
+            String nomeProdotto = "Cioccolato Fondente";
+            String descrizione = "Delizioso cioccolato fondente al 70% di cacao.";
+            double prezzo = 2.99;
+            int disponibilita = 100;
+            boolean disponibile = true;
+            String categoria = "cioccolata";
+
+
+
+            Prodotto cioccolatoFondente = new Prodotto(nomeProdotto, descrizione, prezzo, disponibilita, disponibile, categoria, null);
+
+
+
+
             ArrayList<Prodotto> lista = null;
+            lista = new ArrayList();
+            lista.add(cioccolatoFondente);
             ProdottoDao prodottoDao = new ProdottoDao();
 
 
+
             try {
-                lista = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera tutti i prodotti
+//                lista = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera tutti i prodotti
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,7 +61,7 @@
 
         <div class="main-product-item">
             <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
-                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150">
+<%--                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150" alt="immagine non disponibile">--%>
                 <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
                 <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
             </a>

@@ -14,7 +14,7 @@
 <div class="card section">
     <h2>Aggiungi Prodotti</h2>
 
-    <form action="../addProduct" method="post" enctype="multipart/form-data">
+    <form action="<%= request.getContextPath() %>/addProduct" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="productName">Nome Prodotto:</label>
             <input type="text" id="productName" name="nomeProdotto" required>
@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
             <label for="productImage">Aggiungi Immagine </label>
-            <input type="file" id="productImage" name="img" class="file-input" required>
+            <input type="file" id="productImage" name="img" class="file-input" alt="Err_Img" required>
         </div>
         <div class="form-group">
             <button type="submit" class="custom-file-button">Aggiungi Prodotto</button>

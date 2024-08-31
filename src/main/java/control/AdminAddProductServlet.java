@@ -20,6 +20,22 @@ public class AdminAddProductServlet extends HttpServlet {
 
     private ProdottoDao prodottoDao;
 
+    public static String stringFilter(String stringa) {
+        StringBuffer sb = new StringBuffer(stringa.length());
+
+        for (int i = 0; i < stringa.length(); i++) {
+            if (stringa.charAt(i) != '#') {
+                sb.append(stringa.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
+
+
+
+
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -40,6 +56,9 @@ public class AdminAddProductServlet extends HttpServlet {
         if (!parts.isEmpty()) {
             // Estrae i dati dal form
             String nome = request.getParameter("nomeProdotto");
+            String nomeFiltrato = stringFilter(nome);
+            
+            
             String descrizione = request.getParameter("descrizione");
             double prezzo = Double.parseDouble(request.getParameter("prezzo"));
             int disponibilita = Integer.parseInt(request.getParameter("disponibilita"));
@@ -56,14 +75,34 @@ public class AdminAddProductServlet extends HttpServlet {
                 }
             }
 
-            Prodotto prodotto = new Prodotto(nome, descrizione, prezzo, disponibilita, true, categoria, image);
+            Prodotto prodotto = new Prodotto(nomeFiltrato, descrizione, prezzo, disponibilita, true, categoria, image);
 
             try {
                 // Salva il prodotto usando il DAO
                 prodottoDao.doSave(prodotto);
-                response.sendRedirect(request.getContextPath() + "/success.jsp");
+                
+                
+                //Manda un alerta ad un  file js 
+                // Messaggio da mostrare in JavaScript dopo l'aggiornamento
+                String message = "Prodotto aggiunto con successo";
+
+                // Ottieni il context path
+                String contextPath = request.getContextPath();
+
+                //script JavaScript con il context path nel reindirizzamento
+                String script = "<script>alert('" + message + "');" +
+                        "window.location.href='" + contextPath + "/adminPage/adminPage.jsp';</script>";
+
+                // Scrivi lo script come risposta
+                response.setContentType("text/html");
+                response.getWriter().write(script);
+                
+                
+                
+                
             } catch (SQLException e) {
-                response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
+                
+                
                 throw new ServletException("Errore durante l'aggiunta del prodotto", e);
                 
             }

@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Prodotto" %>
-<%@ page import="model.ProdottoDao" %>
-<%@ page import="model.ProdottoDaoInterface" %>
-<%@ page import="java.sql.SQLException" %>
 <%@ page import="model.Ordine" %>
+<%@ page import="model.OrdineDAO" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -14,40 +11,28 @@
 </head>
 <body>
 <div class="card section">
-    <h1>Lista degli ordini effettuati.</h1>
+    <h1>Lista Ordini</h1>
     <%
-        ArrayList<Ordine> listaOrdini = (ArrayList<Ordine>) request.getAttribute("listaOrdini");
-        if (listaOrdini != null && !listaOrdini.isEmpty()) {
+        OrdineDAO ordineDAO = new OrdineDAO();
+        ArrayList<Ordine> listaOrdini = ordineDAO.selectAllOrdini();
+
+        if (!listaOrdini.isEmpty()) {
+            for (Ordine ordine : listaOrdini) {
     %>
-    <table>
-        <thead>
-        <tr>
-            <th>ID Ordine</th>
-            <th>Data Ordine</th>
-            <th>Nome Cliente</th>
-            <th>Cognome Cliente</th>
-            <th>CAP</th>
-            <th>Indirizzo di Consegna</th>
-            <th>Totale</th>
-            <th>Stato</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Ordine ordine : listaOrdini) { %>
-        <tr>
-            <td><%= ordine.getOrderID() %></td>
-            <td><%= ordine.getDataOrdine() %></td>
-            <td><%= ordine.getNomeCliente() %></td>
-            <td><%= ordine.getCognomeCliente() %></td>
-            <td><%= ordine.getCap() %></td>
-            <td><%= ordine.getIndirizzoDiConsegna() %></td>
-            <td>€<%= ordine.getTotale() %></td>
-            <td><%= ordine.isStato() ? "Completato" : "In corso" %></td>
-        </tr>
-        <% } %>
-        </tbody>
-    </table>
-    <% } else { %>
-    <p>Al momento non ci sono ordini effettuati.</p>
+    <div class="order">
+        <p>ID Ordine: <%= ordine.getOrderID() %></p>
+        <p>Data Ordine: <%= ordine.getDataOrdine() %></p>
+        <p>Cliente: <%= ordine.getNomeCliente() %> <%= ordine.getCognomeCliente() %></p>
+        <p>Indirizzo di consegna: <%= ordine.getIndirizzoDiConsegna() %>, <%= ordine.getCap() %></p>
+        <p>Totale: € <%= ordine.getTotale() %></p>
+        <p>Stato: <%= ordine.isStato() ? "Completato" : "In corso" %></p>
+    </div>
+    <%
+        }
+    } else {
+    %>
+    <p>Nessun ordine presente.</p>
     <% } %>
 </div>
+</body>
+</html>

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @WebServlet("/AdminModifyProductServlet")
@@ -20,6 +18,10 @@ public class AdminModifyProductServlet extends HttpServlet {
         // Recupera i parametri dal form
         String nomeProdotto = request.getParameter("nomeProdotto");
         String prezzoString = request.getParameter("prezzo");
+        String quantitaString = request.getParameter("quantita");
+        String img = request.getParameter("img");
+        String categoria = request.getParameter("categoria");
+        String idProdotto = request.getParameter("idProdotto");
 
         // Sostituisci la virgola con il punto nel prezzo
         String prezzoFormatted = prezzoString.replace(",", ".");
@@ -35,6 +37,14 @@ public class AdminModifyProductServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Formato prezzo non valido: " + prezzoString, e);
         }
+
+        // Imposta la quantità
+        int quantita = Integer.parseInt(quantitaString);
+        prodotto.setDisponibility(quantita);
+
+        // Imposta immagine e categoria
+        prodotto.setImg(img.getBytes()); // Assumendo che l'immagine sia memorizzata come byte[] nel modello
+        prodotto.setCategoria(categoria);
 
         // Aggiorna il prodotto nel database
         ProdottoDao dao = new ProdottoDao();

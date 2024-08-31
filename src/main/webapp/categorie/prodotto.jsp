@@ -1,12 +1,18 @@
 <%@ page import="model.Prodotto, model.ProdottoDao" %>
 <%@ page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+<%
+    Prodotto p = (Prodotto) request.getSession().getAttribute("prodotto");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dettaglio Prodotto</title>
+    <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="../CSS/prodotto.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/prodotto.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/54779b1c8e.js" crossorigin="anonymous"></script>
 </head>
@@ -43,7 +49,7 @@
 
         <div class="product-box">
             <div class="image-box">
-                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" height="300">
+                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" width="300px">
             </div>
 
             <div class="user-box">
@@ -51,7 +57,6 @@
                     <p><%= prodotto.getNomeProdotto() %></p>
                     <p><%= String.format("%.2f", prodotto.getPrezzo()) %> &euro;</p>
 
-                    <p>Ingredienti: <%= prodotto.getDescrizione() %></p>
                     <div class="quantity">
                         <label for="quantity">Quantità:</label>
                         <input type="number" id="quantity" name="quantity" value="1" min="1">
@@ -64,9 +69,25 @@
                 </div>
 
                 <p>Descrizione: <%= prodotto.getDescrizione() %></p>
-                <form action="<%= request.getContextPath() %>/addToCartServlet" method="post">
-                    <button id="buy-button" onclick="addToCart()">Aggiungi al carrello</button>
-                </form>
+
+                <a href="../CartInteraction?action=addProdotto&nome=<%=prodotto.getNomeProdotto()%>&page=prodotto.jsp">
+                    <button id="buy-button" >Aggiungi al carrello</button>
+                </a>
+
+
+<%--                //funzione  per addToCart--%>
+<%--                function addToCart() {--%>
+<%--                const productName = "<%= prodotto.getNomeProdotto() %>";--%>
+<%--                const url = `./CartInteraction?action=addProdotto&name=${productName}&page=prodotto.jsp`;--%>
+
+<%--                window.location.href = url;--%>
+<%--                }--%>
+
+
+
+            <%--                <form action="<%= request.getContextPath() %>/CartInteraction" method="post">--%>
+<%--                    <button id="buy-button" >Aggiungi al carrello</button>--%>
+<%--                </form>--%>
             </div>
         </div>
 
@@ -80,6 +101,6 @@
         %>
     </div>
 </div>
-<%@ include file="../fragments/footer.jsp" %>
 </body>
+<%@ include file="../fragments/footer.jsp" %>
 </html>
