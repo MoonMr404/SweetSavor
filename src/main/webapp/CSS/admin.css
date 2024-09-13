@@ -107,6 +107,12 @@ body {
     color: #333;
 }
 
+#order-details{
+    margin-top: 20x;
+    margin-bottom: 20px;
+}
+
+
 /* Media query per la barra laterale responsive */
 @media (max-width: 768px) {
     .sidebar {

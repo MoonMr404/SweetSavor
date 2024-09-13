@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista ordini</title>
-    <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
 </head>
 <body>
 <div class="card section">

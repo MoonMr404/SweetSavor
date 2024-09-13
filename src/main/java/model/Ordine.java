@@ -2,7 +2,6 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import java.util.UUID;
 
 public class Ordine {
@@ -50,7 +49,7 @@ public class Ordine {
     public void setDataOrdine() {
         LocalDateTime currentDateTime = LocalDateTime.now();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         String formattedDateTime = currentDateTime.format(formatter);
         this.dataOrdine = formattedDateTime;

@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class OrdineDAO implements OrdineDAOInterface {
@@ -29,9 +31,16 @@ public class OrdineDAO implements OrdineDAOInterface {
 
     @Override
     public void insertOrdine(Ordine ordine) throws SQLException {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        String formattedDateTime = currentDateTime.format(formatter);
+        
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDINE_SQL)) {
             preparedStatement.setString(1, ordine.getOrderID());
+            //preparedStatement.setString(2, formattedDateTime);
             preparedStatement.setString(2, ordine.getDataOrdine());
             preparedStatement.setString(3, ordine.getNomeCliente());
             preparedStatement.setString(4, ordine.getCognomeCliente());

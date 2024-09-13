@@ -47,11 +47,15 @@ public class CheckoutServlet extends HttpServlet {
 
         OrdineDAO dao = new OrdineDAO();
         try {
+            // Rimuove il carrello dalla sessione
+            request.getSession().removeAttribute("cart");
+            
             dao.insertOrdine(ordine);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        
+        
         response.sendRedirect(request.getContextPath() + "/common/OrderSuccess.jsp");
     }
 

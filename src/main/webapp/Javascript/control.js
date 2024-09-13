@@ -62,3 +62,41 @@ function logout() {
     };
     xhr.send();
 }
+
+
+
+function retrieveDataFromCheckout() {
+    let firstName = document.getElementById('first-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let email = document.getElementById('email').value;
+    let address = document.getElementById('address').value;
+    let city = document.getElementById('city').value;
+    let postalCode = document.getElementById('postal-code').value;
+    let country = document.getElementById('country').value;
+
+    let order = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        address: address,
+        city: city,
+        postalCode: postalCode,
+        country: country
+    };
+
+    fetch('/saveOrder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+}
+
+
+
+
+
