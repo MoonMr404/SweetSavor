@@ -36,7 +36,7 @@
         <div class="product-list" id="cart-list">
             <h2>Carrello</h2>
 
-            <form id="cart-form" action="<%= request.getContextPath() %>/UpdateCartServlet" method="post">
+            <form action="<%=request.getContextPath()%>/processCheckout" method="post" id="cart-form" >
                 <% for (int i = 0; i < listaProdotti.size(); i++) {
                     Prodotto prodotto = listaProdotti.get(i);
                 %>
@@ -64,7 +64,7 @@
                 <h2>Riepilogo Ordine</h2>
                 <p>Totale Prodotti: <%= totalProdotti %></p>
                 <p>Totale Importo: €<%= String.format("%.2f", totalImporto) %></p>
-                <a href="<%= request.getContextPath() %>/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
+                <a href="<%= request.getContextPath() %>/common/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
             </div>
         </div>
         <% } else { %>
