@@ -8,5 +8,5 @@ public interface UserDaoInterface<T> {
     public boolean doDelete(T obj ) throws SQLException;
     public T retrieveUser(String email, String password) throws SQLException;
     public List<T> retrieveAll() throws SQLException;
-    
+    public boolean updateUserInfo(String email,String oldPassword, String newUsername, String newPassword) throws SQLException;
 }
