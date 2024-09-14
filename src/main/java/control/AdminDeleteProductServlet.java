@@ -41,6 +41,7 @@ public class AdminDeleteProductServlet extends HttpServlet {
         }
 
         // Redirezione alla pagina deleteProduct.jsp
-        request.getRequestDispatcher(request.getContextPath() + "/adminPage/deleteProduct.jsp").forward(request, response);
+        request.getRequestDispatcher("/adminPage/adminPage.jsp").forward(request, response);
+
     }
 }

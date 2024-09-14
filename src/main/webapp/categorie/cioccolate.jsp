@@ -26,30 +26,12 @@
         <!-- Showcase prodotti -->
         <%
 
-
-            String nomeProdotto = "Cioccolato Fondente";
-            String descrizione = "Delizioso cioccolato fondente al 70% di cacao.";
-            double prezzo = 2.99;
-            int disponibilita = 100;
-            boolean disponibile = true;
-            String categoria = "cioccolata";
-
-
-
-            Prodotto cioccolatoFondente = new Prodotto(nomeProdotto, descrizione, prezzo, disponibilita, disponibile, categoria, null);
-
-
-
-
-            ArrayList<Prodotto> lista = null;
+                        ArrayList<Prodotto> lista = null;
             lista = new ArrayList();
-            lista.add(cioccolatoFondente);
             ProdottoDao prodottoDao = new ProdottoDao();
-
-
-
+            
             try {
-//                lista = prodottoDao.doRetrieveByCategoria("cioccolata"); // Recupera tutti i prodotti
+              lista = prodottoDao.doRetrieveByCategoria("cioccolata");
 
             } catch (Exception e) {
                 e.printStackTrace();
