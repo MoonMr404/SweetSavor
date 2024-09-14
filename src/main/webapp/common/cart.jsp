@@ -72,7 +72,7 @@
         <% } %>
     </div>
 
-    <%@ include file="../fragments/footer.jsp" %>
+    <jsp:include page="/fragments/footer.jsp" />
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/fragments.css">
     <script src="<%= request.getContextPath() %>/Javascript/cart.js"></script>
 
