@@ -56,7 +56,7 @@
     </div>
 </div>
 
-<script src="<%= request.getContextPath() %>/Javascript/control.js"></script> <!-- Sposta il tag script in fondo al body -->
+<script src="<%= request.getContextPath() %>/Javascript/control.js"></script> 
 
 </body>
 </html>

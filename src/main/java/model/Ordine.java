@@ -1,5 +1,9 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
 public class Ordine {
     private String orderID;
     private String dataOrdine;
@@ -21,11 +25,20 @@ public class Ordine {
         this.stato = stato;
     }
 
+    public Ordine() {
+        
+    }
+
     public String getOrderID() {
         return orderID;
     }
 
+    public String createOrderID(){
+        return UUID.randomUUID().toString();
+    }
     public void setOrderID(String orderID) {
+        
+        
         this.orderID = orderID;
     }
 
@@ -33,8 +46,13 @@ public class Ordine {
         return dataOrdine;
     }
 
-    public void setDataOrdine(String dataOrdine) {
-        this.dataOrdine = dataOrdine;
+    public void setDataOrdine() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        String formattedDateTime = currentDateTime.format(formatter);
+        this.dataOrdine = formattedDateTime;
     }
 
     public String getNomeCliente() {

@@ -30,3 +30,23 @@ function loadSection(url) {
 
     xhr.send();
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/getOrder')
+        .then(response => response.json())
+        .then(data => {
+            let details = `
+                <p>First Name: ${data.firstName}</p>
+                <p>Last Name: ${data.lastName}</p>
+                <p>Email: ${data.email}</p>
+                <p>Address: ${data.address}</p>
+                <p>City: ${data.city}</p>
+                <p>Postal Code: ${data.postalCode}</p>
+                <p>Country: ${data.country}</p>
+                
+            `;
+            document.getElementById('order-details').innerHTML = details;
+        })
+        .catch(error => console.error('Error:', error));
+});

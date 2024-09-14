@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Aggiungi Prodotti</title>
-    <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>
 <script src="/Javascript/control.js"></script>

@@ -10,7 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Tutti i prodotti</title>
-    <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>
 <div class="card section">

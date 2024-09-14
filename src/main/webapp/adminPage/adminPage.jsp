@@ -1,11 +1,15 @@
-<!-- admin.jsp -->
+<!-- admin.jsp 
+Check if logged
+-->
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>Admin Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin E-commerce</title>
-    <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
+    <script src="admin.js"></script>
 </head>
 <body>
 <div class="header">
@@ -19,13 +23,12 @@
         <a href="modifyProduct.jsp" class="sidebar-link" data-url="modifyProduct.jsp">Modifica Prodotti</a>
         <a href="currentProducts.jsp" class="sidebar-link" data-url="currentProducts.jsp">Prodotti Presenti</a>
         <a href="deleteProduct.jsp" class="sidebar-link" data-url="deleteProduct.jsp">Elimina Prodotti</a>
-        <a href="<%= request.getContextPath() %>/LogoutServlet"><button onclick="logout()">Logout</button></a>
+        <a href="<%= request.getContextPath() %>/LogoutServlet" >Logout</a>
     </div>
     <div class="main" id="content">
         <!-- parte dove viente caricato il  contenuto dinamico -->
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="admin.js"></script>
+
 </body>
 </html>

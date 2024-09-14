@@ -1,16 +1,10 @@
 <%@ page import="model.Prodotto, model.ProdottoDao" %>
 <%@ page import="java.util.Base64" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
-<%
-    Prodotto p = (Prodotto) request.getSession().getAttribute("prodotto");
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SweetSavor</title>
+    <title>Dettaglio Prodotto</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/prodotto.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -49,7 +43,7 @@
 
         <div class="product-box">
             <div class="image-box">
-                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" width="300px">
+                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" >
             </div>
 
             <div class="user-box">
@@ -57,10 +51,12 @@
                     <p><%= prodotto.getNomeProdotto() %></p>
                     <p><%= String.format("%.2f", prodotto.getPrezzo()) %> &euro;</p>
 
+                    <!--
                     <div class="quantity">
                         <label for="quantity">Quantità:</label>
                         <input type="number" id="quantity" name="quantity" value="1" min="1">
                     </div>
+                    -->
                     <% if (prodotto.isDisponibile()) { %>
                     <p class="availability">Disponibilità: <span class="in-stock">In Stock</span> <i id="check-i" class="fa-solid fa-check"></i></p>
                     <% } else { %>
@@ -70,24 +66,11 @@
 
                 <p>Descrizione: <%= prodotto.getDescrizione() %></p>
 
-                <a href="../CartInteraction?action=addProdotto&nome=<%=prodotto.getNomeProdotto()%>&page=prodotto.jsp">
-                    <button id="buy-button" >Aggiungi al carrello</button>
-                </a>
-
-
-<%--                //funzione  per addToCart--%>
-<%--                function addToCart() {--%>
-<%--                const productName = "<%= prodotto.getNomeProdotto() %>";--%>
-<%--                const url = `./CartInteraction?action=addProdotto&name=${productName}&page=prodotto.jsp`;--%>
-
-<%--                window.location.href = url;--%>
-<%--                }--%>
-
-
-
-            <%--                <form action="<%= request.getContextPath() %>/CartInteraction" method="post">--%>
-<%--                    <button id="buy-button" >Aggiungi al carrello</button>--%>
-<%--                </form>--%>
+                <!-- Form per aggiungere il prodotto al carrello -->
+                <form action="<%= request.getContextPath() %>/CartInteraction" method="post">
+                    <input type="hidden" name="nome" value="<%= prodotto.getNomeProdotto() %>">
+                    <button type="submit" id="buy-button">Aggiungi al carrello</button>
+                </form>
             </div>
         </div>
 
@@ -101,6 +84,6 @@
         %>
     </div>
 </div>
-</body>
 <%@ include file="../fragments/footer.jsp" %>
+</body>
 </html>

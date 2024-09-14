@@ -33,9 +33,11 @@
       <%
         if (request.getSession(false) != null && session.getAttribute("currentSessionUser") != null) {
       %>
-      <li><button onclick="logout()">Logout</button></li>
+      <li><a href="<%= request.getContextPath() %>/common/areaPersonale.jsp">Area Personale<i class='bx bxs-user' id="accBox"></i></a></li>
+      <li><a href="<%= request.getContextPath() %>/LogoutServlet">Logout <i id="accBox"></i></a></li>
       <% } else { %>
       <li><a href="<%= request.getContextPath() %>/common/login.jsp">Login<i class='bx bxs-user' id="accBox"></i></a></li>
+      
       <% } %>
       <div class="cart-icon">
         <li><a href="<%= request.getContextPath() %>/common/cart.jsp">Carrello<i class='bx bx-cart-add'></i></a></li>

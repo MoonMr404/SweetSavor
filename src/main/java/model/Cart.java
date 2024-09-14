@@ -29,7 +29,9 @@ public class Cart {
     }
 
 
-
+    public boolean cartRead(Prodotto prodotto){
+        return listaProdotti.contains(prodotto);
+    }
 
 
 

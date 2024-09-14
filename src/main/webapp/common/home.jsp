@@ -23,17 +23,13 @@
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        <%@include file="/CSS/fragments.css" %>
-
-        
-    </style>
     <script src="<%= request.getContextPath() %>/Javascript/loginStatus.js"></script>
 </head>
 <body>
 
-<%@include file="/fragments/header.jsp" %>
+    <jsp:include page="/fragments/header.jsp"/>
 
+    
 <div class="home-container">
     <h1 class="home-header">I NOSTRI PRODOTTI</h1>
     <div class="main-home-container">
@@ -54,7 +50,7 @@
     </div>
 </div>
 
-<%@include file="/fragments/footer.jsp" %>
 
+    <jsp:include page="/fragments/footer.jsp" />
 </body>
 </html>
