@@ -120,7 +120,7 @@ public class UserDao implements UserDaoInterface<User> {
 
                 int rowsAffected = updateStmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    updated = true;  // Se l'aggiornamento ha successo
+                    updated = true;  // Aggiornamento avvenuto con successo
                 }
             }
         } finally {
