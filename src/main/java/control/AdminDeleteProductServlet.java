@@ -15,6 +15,11 @@ import java.sql.SQLException;
 public class AdminDeleteProductServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req,resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nomeProdotto = request.getParameter("nomeProdotto");
 
@@ -36,6 +41,6 @@ public class AdminDeleteProductServlet extends HttpServlet {
         }
 
         // Redirezione alla pagina deleteProduct.jsp
-        request.getRequestDispatcher("/deleteProduct.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/adminPage/deleteProduct.jsp").forward(request, response);
     }
 }

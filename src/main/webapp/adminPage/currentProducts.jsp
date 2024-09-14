@@ -20,7 +20,6 @@
     <%
         ProdottoDaoInterface prodottoDao = new ProdottoDao();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
-
         try {
             prodotti = prodottoDao.doRetrieveAll();
         } catch (SQLException e) {
@@ -29,8 +28,14 @@
     <h3>Si è verificato un errore durante il recupero dei prodotti.</h3>
     <%
         }
-    %>
 
+        // Controlla se la lista è vuota
+        if (prodotti.isEmpty()) {
+    %>
+    <h3>Nessun prodotto presente al momento.</h3>
+    <%
+    } else {
+    %>
     <table border="1">
         <thead>
         <tr>
@@ -62,6 +67,9 @@
         %>
         </tbody>
     </table>
+    <%
+        }
+    %>
 </div>
 </body>
 </html>
