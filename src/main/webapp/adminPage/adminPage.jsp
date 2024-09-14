@@ -5,9 +5,9 @@ Check if logged
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>Admin Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin E-commerce</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
     <script src="admin.js"></script>
 </head>

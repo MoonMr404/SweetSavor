@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>Elimina Prodotti</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>
 <div class="card section">
