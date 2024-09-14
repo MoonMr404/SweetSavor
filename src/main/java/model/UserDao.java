@@ -1,13 +1,7 @@
 package model;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,5 +97,44 @@ public class UserDao implements UserDaoInterface<User> {
         return userList;
     }
 
-  
+    @Override
+    public boolean updateUserInfo(String email, String oldPassword, String newUsername, String newPassword) throws SQLException {
+        String updateSql = "UPDATE users SET username = ?, password = ? WHERE email = ?";
+        boolean updated = false;
+
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+
+        try {
+            connection = getConnection(); // Ottieni la connessione al DB
+
+            // Usa il metodo retrieveUser per ottenere l'utente
+            User user = retrieveUser(email, oldPassword);
+
+            // Se l'utente esiste, prepara l'aggiornamento delle credenziali
+            if (user != null) {
+                updateStmt = connection.prepareStatement(updateSql);
+                updateStmt.setString(1, newUsername);
+                updateStmt.setString(2, newPassword);  // Assicurati di crittografare la password se necessario
+                updateStmt.setString(3, email);
+
+                int rowsAffected = updateStmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    updated = true;  // Se l'aggiornamento ha successo
+                }
+            }
+        } finally {
+            // Chiudi le risorse
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+
+        return updated;  // Ritorna true se l'aggiornamento ha avuto successo
+    }
+
+
 }
