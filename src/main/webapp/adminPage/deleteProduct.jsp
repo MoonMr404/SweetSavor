@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Elimina Prodotti</title>
-    <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
 </head>
 <body>
 <div class="card section">
