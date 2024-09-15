@@ -14,7 +14,7 @@
 <body>
 
 <div class="cart-container">
-    <p><i>La tua email è stato modificata correttamente.</i></p>
+    <p><i>La tua email è stata modificata correttamente.</i></p>
 </div>
 
 <%@ include file="../fragments/footer.jsp" %>
