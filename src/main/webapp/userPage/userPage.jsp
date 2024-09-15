@@ -3,9 +3,11 @@
 Pagine di area personale dell'utente che effettua il login.
 
 Funzioni:
-controllo dei suoi ordini;
-modifica della credenziali (email e password);
-
+-controllo dei suoi ordini;
+-modifica della credenziali:
+     -email;
+     -password;
+     -username
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="it">
