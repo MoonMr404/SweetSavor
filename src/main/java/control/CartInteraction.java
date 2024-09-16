@@ -19,10 +19,10 @@ public class CartInteraction extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera i parametri dalla richiesta
         String nomeProdotto = req.getParameter("nome");
-        String quantitaStr = req.getParameter("quantita");
+        String quantitaStr = req.getParameter("quantity"); // Cambiato a "quantity"
 
         // Converte la quantità da stringa a intero (gestendo possibili errori)
-        int quantita = 1;
+        int quantita = 1; // Valore predefinito nel caso in cui ci siano errori
         try {
             quantita = Integer.parseInt(quantitaStr);
         } catch (NumberFormatException e) {
@@ -54,7 +54,7 @@ public class CartInteraction extends HttpServlet {
         }
 
         // Aggiunge o aggiorna la quantità del prodotto nel carrello
-        cart.addProdotto(prodotto, quantita);
+        cart.addProdotto(prodotto, quantita); // Aggiorna la quantità correttamente
 
         // Reindirizza alla pagina del carrello
         resp.sendRedirect(req.getContextPath() + "/common/cart.jsp");
