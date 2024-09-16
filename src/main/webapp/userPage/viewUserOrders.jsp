@@ -15,7 +15,7 @@
     <h1>I miei ordini</h1>
     <%
         OrdineDAO ordineDAO = new OrdineDAO();
-        ArrayList<Ordine> listaOrdini = ordineDAO.selectOrdineByUserID(userID);
+        ArrayList<Ordine> listaOrdini = ordineDAO
 
         if (!listaOrdini.isEmpty()) {
             for (Ordine ordine : listaOrdini) {

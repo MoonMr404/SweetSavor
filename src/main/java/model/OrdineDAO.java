@@ -11,7 +11,8 @@ public class OrdineDAO implements OrdineDAOInterface {
     private static final String SELECT_ALL_ORDINI = "SELECT orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato FROM Ordini";
     private static final String DELETE_ORDINE_SQL = "DELETE FROM Ordini WHERE orderID = ?";
     private static final String UPDATE_ORDINE_SQL = "UPDATE Ordini SET dataOrdine = ?, nomeCliente = ?, cognomeCliente = ?, cap = ?, indirizzoDiConsegna = ?, totale = ?, stato = ? WHERE orderID = ?";
-
+    private static final String SELECT_ORDINE_BY_USER = "SELECT orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato FROM Ordini WHERE nomeCliente = ? AND email = ?";
+    
     protected Connection getConnection() {
         String jdbcURL = "jdbc:mysql://localhost:3306/SweetAndSavor";
         String jdbcUsername = "root";
@@ -127,5 +128,42 @@ public class OrdineDAO implements OrdineDAOInterface {
             rowUpdated = statement.executeUpdate() > 0;
             return rowUpdated;
         }
+    }
+
+    
+
+    @Override
+    public Ordine selectUserOrder(String userName, String email) throws SQLException {
+        Ordine ordine = null;
+
+        // Usa un try-with-resources per gestire la connessione e la query
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDINE_BY_USER)) {
+
+            // Imposta i parametri della query
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, email);
+
+            // Esegui la query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Se esiste un ordine, lo recuperiamo
+            if (rs.next()) {
+                String orderID = rs.getString("orderID");
+                String dataOrdine = rs.getString("dataOrdine");
+                String cognomeCliente = rs.getString("cognomeCliente");
+                String cap = rs.getString("cap");
+                String indirizzoDiConsegna = rs.getString("indirizzoDiConsegna");
+                double totale = rs.getDouble("totale");
+                boolean stato = rs.getBoolean("stato");
+
+                // Crea un nuovo oggetto Ordine
+                ordine = new Ordine(orderID, dataOrdine, userName, cognomeCliente, cap, indirizzoDiConsegna, totale, stato);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ordine;
     }
 }

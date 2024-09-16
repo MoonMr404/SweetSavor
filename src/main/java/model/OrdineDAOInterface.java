@@ -9,4 +9,5 @@ public interface OrdineDAOInterface {
     ArrayList<Ordine> selectAllOrdini();
     boolean deleteOrdine(String orderID) throws SQLException;
     boolean updateOrdine(Ordine ordine) throws SQLException;
+    Ordine selectUserOrder(String userName, String email)throws SQLException;
 }
