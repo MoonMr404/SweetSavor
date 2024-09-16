@@ -18,7 +18,7 @@
 
         User user = (User) session.getAttribute("user"); 
         OrdineDAO ordineDAO = new OrdineDAO();
-        ArrayList<Ordine> listaOrdini = (ArrayList<Ordine>) ordineDAO.selectUserOrder(user.getUsername(), user.getEmail());
+        ArrayList<Ordine> listaOrdini = ordineDAO.selectUserOrder(user.getUsername(), user.getEmail());
         
         
         if (!listaOrdini.isEmpty() {
@@ -27,7 +27,7 @@
     %>
 
     <div class="order">
-        <p>ID Ordine: <%= ordine.getOrderID() %></p>
+        <p>ID Ordine: <%= ordine.getOrderID() %></p>ì
         <p>Data Ordine: <%= ordine.getDataOrdine() %></p>
         <p>Indirizzo di consegna: <%= ordine.getIndirizzoDiConsegna() %>, <%= ordine.getCap() %></p>
         <p>Totale: € <%= ordine.getTotale() %></p>
