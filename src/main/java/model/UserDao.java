@@ -136,5 +136,31 @@ public class UserDao implements UserDaoInterface<User> {
         return updated;  // Ritorna true se l'aggiornamento ha avuto successo
     }
 
+    @Override
+    // Metodo per controllare che la password inserita dall'utente sia uguale a quella originale, per il cambio password
+    public boolean verifyPassword(String email, String passwordAttuale) throws SQLException, NoSuchAlgorithmException {
+        Connection connection = DatabaseConnection.initializeDatabase();
+        String query = "SELECT password FROM users WHERE email = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
 
+            if (resultSet.next()) {
+                String storedPassword = resultSet.getString("password");
+                return hashPassword(passwordAttuale).equals(storedPassword);
+            }
+        }
+        return false;
+    }
+    @Override
+    // Aggiornare la password nel database con quella nuova
+    public void updatePassword(String email, String nuovaPassword) throws SQLException, NoSuchAlgorithmException {
+        Connection connection = DatabaseConnection.initializeDatabase();
+        String query = "UPDATE users SET password = ? WHERE email = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, hashPassword(nuovaPassword));
+            statement.setString(2, email);
+            statement.executeUpdate();
+        }
+    }
 }
