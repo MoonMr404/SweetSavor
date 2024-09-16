@@ -29,6 +29,7 @@
     // Calcola il totale dei prodotti e l'importo totale
     int totalProdotti = listaProdotti.size();
     double totalImporto = cart.getTotalPrice();
+
 %>
 
 <div class="cart-container">
@@ -38,9 +39,7 @@
 
         <form action="<%=request.getContextPath()%>/processCheckout" method="post" id="cart-form">
             <% for (Prodotto prodotto : listaProdotti) {
-                //int quantitaProdotto = cart.getQuantitaProdotto(prodotto); // Ottieni la quantità del prodotto
-                int quantitaProdotto = cart.get
-                
+                int quantitaProdotto = cart.getQuantita(prodotto); // Ottieni la quantità del prodotto
             %>
             <div class="product-item">
                 <div class="image-box">
@@ -49,10 +48,7 @@
                 <div class="product-info">
                     <p>Nome Prodotto: <%= prodotto.getNomeProdotto() %></p>
                     <p>Prezzo: €<%= String.format("%.2f", prodotto.getPrezzo()) %></p>
-                    <div class="quantity">
-                        <label for="quantity_<%= prodotto.getNomeProdotto() %>">Quantità:</label>
-                        <input type="number" id="quantity_<%= prodotto.getNomeProdotto() %>" name="quantity_<%= prodotto.getNomeProdotto() %>" class="quantity-input" value="<%= quantitaProdotto %>" min="1" max="<%= prodotto.getDisponibility() %>">
-                    </div>
+                
                     <p class="availability">Disponibilità: <span class="in-stock">In Stock</span> <i class="fa-solid fa-check"></i></p>
                     <!-- Form per rimuovere il prodotto -->
                     <form action="<%= request.getContextPath() %>/RemoveProductFromCart" method="post" style="display:inline;">
@@ -68,7 +64,7 @@
     <div class="checkout-box">
         <div class="content-box">
             <h2>Riepilogo Ordine</h2>
-            <p>Totale Prodotti: <%= totalProdotti %></p>
+            <p>Totale Prodotti: <%= cart.getQuantitaProdotti() %></p>
             <p>Totale Importo: €<%= String.format("%.2f", totalImporto) %></p>
             <a href="<%= request.getContextPath() %>/common/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
         </div>

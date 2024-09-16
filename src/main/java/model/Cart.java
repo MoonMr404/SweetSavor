@@ -11,8 +11,6 @@ public class Cart {
         listaProdotti = new ArrayList<>();
         quantitaProdotti = new ArrayList<>();
     }
-    
-    
 
     public boolean isEmpty(){
         return listaProdotti.isEmpty();
@@ -60,5 +58,20 @@ public class Cart {
             total += listaProdotti.get(i).getPrezzo() * quantitaProdotti.get(i);
         }
         return total;
+    }
+    
+    public int getQuantitaProdotti(){
+        int i = quantitaProdotti.size();
+        return i;
+    }
+
+    // Metodo aggiuntivo per ottenere un prodotto per nome
+    public Prodotto getProdottoByName(String nomeProdotto) {
+        for (Prodotto prodotto : listaProdotti) {
+            if (prodotto.getNomeProdotto().equals(nomeProdotto)) {
+                return prodotto;
+            }
+        }
+        return null;
     }
 }
