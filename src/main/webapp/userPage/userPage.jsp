@@ -16,7 +16,7 @@ Funzioni:
     <title>User Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admiìn.css">
     <script src="<%=request.getContextPath()%>/Javascript/userPage.js"></script>
 </head>
 <body>
