@@ -74,4 +74,13 @@ public class Cart {
         }
         return null;
     }
+
+    public int getTotaleQuantitaProdotti() {
+        int totaleQuantita = 0;
+        for (int quantita : quantitaProdotti) {
+            totaleQuantita += quantita;
+        }
+        return totaleQuantita;
+    }
+
 }

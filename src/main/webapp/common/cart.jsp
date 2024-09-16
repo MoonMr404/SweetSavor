@@ -10,6 +10,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/cart.css">
+    <script src="<%= request.getContextPath() %>/Javascript/cart.js"></script>
 </head>
 <body>
 <jsp:include page="/fragments/header.jsp"/>
@@ -27,9 +28,8 @@
     ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) cart.getListaProdotti();
 
     // Calcola il totale dei prodotti e l'importo totale
-    int totalProdotti = listaProdotti.size();
+    int totalProdotti = cart.getTotaleQuantitaProdotti();  // Usa il nuovo metodo
     double totalImporto = cart.getTotalPrice();
-
 %>
 
 <div class="cart-container">
@@ -37,7 +37,8 @@
     <div class="product-list" id="cart-list">
         <h2>Carrello</h2>
 
-        <form action="<%=request.getContextPath()%>/processCheckout" method="post" id="cart-form">
+        <!-- Modulo per il checkout -->
+        <form action="<%=request.getContextPath()%>/CheckoutServlet" method="post" id="cart-form">
             <% for (Prodotto prodotto : listaProdotti) {
                 int quantitaProdotto = cart.getQuantita(prodotto); // Ottieni la quantità del prodotto
             %>
@@ -48,25 +49,23 @@
                 <div class="product-info">
                     <p>Nome Prodotto: <%= prodotto.getNomeProdotto() %></p>
                     <p>Prezzo: €<%= String.format("%.2f", prodotto.getPrezzo()) %></p>
-                
+
                     <p class="availability">Disponibilità: <span class="in-stock">In Stock</span> <i class="fa-solid fa-check"></i></p>
-                    <!-- Form per rimuovere il prodotto -->
-                    <form action="<%= request.getContextPath() %>/RemoveProductFromCart" method="post" style="display:inline;">
-                        <input type="hidden" name="nome" value="<%= prodotto.getNomeProdotto() %>">
-                        <button type="submit" class="remove-button">Rimuovi</button>
-                    </form>
+
+                    <!-- Rimuovi prodotto (gestito con JavaScript) -->
+                    <button type="button" class="remove-button" onclick="removeProduct('<%= prodotto.getNomeProdotto() %>')">Rimuovi</button>
                 </div>
             </div>
             <% } %>
+            <button type="submit" id="checkout-button">Procedi al Pagamento</button>
         </form>
     </div>
 
     <div class="checkout-box">
         <div class="content-box">
             <h2>Riepilogo Ordine</h2>
-            <p>Totale Prodotti: <%= cart.getQuantitaProdotti() %></p>
+            <p>Totale Prodotti: <%= totalProdotti %></p>
             <p>Totale Importo: €<%= String.format("%.2f", totalImporto) %></p>
-            <a href="<%= request.getContextPath() %>/common/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
         </div>
     </div>
     <% } else { %>
@@ -76,7 +75,7 @@
 
 <jsp:include page="/fragments/footer.jsp" />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/fragments.css">
-<script src="<%= request.getContextPath() %>/Javascript/cart.js"></script>
+
 
 </body>
 </html>
