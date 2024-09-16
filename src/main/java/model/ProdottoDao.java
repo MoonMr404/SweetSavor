@@ -152,14 +152,36 @@ public class ProdottoDao implements ProdottoDaoInterface {
 
     @Override
     public void doUpdateQnt(String nome, int qnt) throws SQLException {
-        String sql = "UPDATE prodotto SET disponibilita = ? WHERE nome = ?";
+        String selectSql = "SELECT disponibilita FROM prodotto WHERE nome = ?";
+        String updateSql = "UPDATE prodotto SET disponibilita = ? WHERE nome = ?";
 
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, qnt);
-            stmt.setString(2, nome);
-            stmt.executeUpdate();
+        try (Connection conn = getConnection()) {
+            // Step 1: Ottieni l'attuale disponibilità del prodotto
+            int currentQuantity = 0;
+            try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
+                selectStmt.setString(1, nome);
+                ResultSet rs = selectStmt.executeQuery();
+                if (rs.next()) {
+                    currentQuantity = rs.getInt("disponibilita");
+                }
+            }
+
+            // Step 2: Calcola la nuova quantità
+            int newQuantity = currentQuantity - qnt;
+
+            // Step 3: Aggiorna la quantità solo se rimane positiva
+            if (newQuantity >= 0) {
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                    updateStmt.setInt(1, newQuantity);
+                    updateStmt.setString(2, nome);
+                    updateStmt.executeUpdate();
+                }
+            } else {
+                System.out.println("Errore: Quantità richiesta maggiore della disponibilità attuale.");
+            }
         }
     }
+
 
     @Override
     public void doUpdate(Prodotto prodotto) throws SQLException {

@@ -51,12 +51,6 @@
                     <p><%= prodotto.getNomeProdotto() %></p>
                     <p><%= String.format("%.2f", prodotto.getPrezzo()) %> &euro;</p>
 
-                    <!--
-                    <div class="quantity">
-                        <label for="quantity">Quantità:</label>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    </div>
-                    -->
                     <% if (prodotto.isDisponibile()) { %>
                     <p class="availability">Disponibilità: <span class="in-stock">In Stock</span> <i id="check-i" class="fa-solid fa-check"></i></p>
                     <% } else { %>
@@ -69,8 +63,13 @@
                 <!-- Form per aggiungere il prodotto al carrello -->
                 <form action="<%= request.getContextPath() %>/CartInteraction" method="post">
                     <input type="hidden" name="nome" value="<%= prodotto.getNomeProdotto() %>">
+                    <div class="quantity">
+                        <label for="quantity">Quantità:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
                     <button type="submit" id="buy-button">Aggiungi al carrello</button>
                 </form>
+
             </div>
         </div>
 

@@ -27,7 +27,7 @@
     %>
 
     <div class="order">
-        <p>ID Ordine: <%= ordine.getOrderID() %></p>ì
+        <p>ID Ordine: <%= ordine.getOrderID() %></p>
         <p>Data Ordine: <%= ordine.getDataOrdine() %></p>
         <p>Indirizzo di consegna: <%= ordine.getIndirizzoDiConsegna() %>, <%= ordine.getCap() %></p>
         <p>Totale: € <%= ordine.getTotale() %></p>
