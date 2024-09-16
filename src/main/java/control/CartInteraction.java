@@ -1,6 +1,5 @@
 package control;
 
-
 import model.Cart;
 import model.Prodotto;
 import model.ProdottoDao;
@@ -18,21 +17,24 @@ import java.sql.SQLException;
 public class CartInteraction extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("nome");
-        String quantityParam = req.getParameter("quantity");
-        int quantity = 1; // Valore predefinito nel caso in cui la quantità non venga inviata correttamente
+        // Recupera i parametri dalla richiesta
+        String nomeProdotto = req.getParameter("nome");
+        String quantitaStr = req.getParameter("quantita");
 
-        // Converte il parametro quantity in un intero
+        // Converte la quantità da stringa a intero (gestendo possibili errori)
+        int quantita = 1;
         try {
-            quantity = Integer.parseInt(quantityParam);
+            quantita = Integer.parseInt(quantitaStr);
         } catch (NumberFormatException e) {
-            System.out.println("Errore nella conversione della quantità, verrà utilizzata la quantità predefinita (1).");
+            e.printStackTrace();
+            // Gestione dell'errore (opzionale)
         }
 
-        ProdottoDao dao = new ProdottoDao();
+        ProdottoDao prodottoDao = new ProdottoDao();
         Prodotto prodotto = null;
+
         try {
-            prodotto = dao.doRetrieveByName(name);
+            prodotto = prodottoDao.doRetrieveByName(nomeProdotto);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,6 +44,7 @@ public class CartInteraction extends HttpServlet {
             return;
         }
 
+        // Recupera o crea il carrello dalla sessione
         HttpSession session = req.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
 
@@ -50,15 +53,10 @@ public class CartInteraction extends HttpServlet {
             session.setAttribute("cart", cart);
         }
 
-        // Controlla se il prodotto è già nel carrello
-        if (cart.cartRead(prodotto)) {
-            // Aggiorna la quantità del prodotto nel carrello
-            cart.updateProdotto(prodotto, quantity);
-        } else {
-            // Aggiunge il prodotto con la quantità specificata
-            cart.addProdotto(prodotto, quantity);
-        }
+        // Aggiunge o aggiorna la quantità del prodotto nel carrello
+        cart.addProdotto(prodotto, quantita);
 
+        // Reindirizza alla pagina del carrello
         resp.sendRedirect(req.getContextPath() + "/common/cart.jsp");
     }
 }
