@@ -17,7 +17,7 @@ Funzioni:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
-    <script src="userPage.js"></script>
+    <script src="<%=request.getContextPath()%>/Javascript/userPage.js"></script>
 </head>
 <body>
 <div class="header">
@@ -26,7 +26,6 @@ Funzioni:
 <div class="container">
     <div class="sidebar">
         <a href="viewUserOrders.jsp" class="sidebar-link" data-url="viewUserOrders.jsp">I tuoi ordini</a>
-        <a href="userEmailChange.jsp" class="sidebar-link" data-url="userEmailChange.jsp">Modifica la tua email</a>
         <a href="userUsernameChange.jsp" class="sidebar-link" data-url="userUsernameChange.jsp">Modifica il tuo username</a>
         <a href="userPasswordChange.jsp" class="sidebar-link" data-url="userPasswordChange.jsp"> Modifica la tua password</a>
         <a href="<%= request.getContextPath() %>/LogoutServlet" >Logout</a>
