@@ -1,17 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: liberatostassano
-  Date: 15/09/24
-  Time: 16:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page import="model.User" %>
+<%@ page import="model.UserDao" %>
+<%@page import="model.UserDaoInterface" %>
+<!DOCTYPE html>
+<html lang="it">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Cambio username</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
 </head>
 <body>
+<div class="card-sector">
+    <h2>Cambio username</h2>
 
-
+</div>
 </body>
 </html>
