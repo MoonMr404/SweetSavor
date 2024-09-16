@@ -59,4 +59,28 @@ public class Cart {
         }
         return total;
     }
+    
+    public int getQuantitaProdotti(){
+        int i = quantitaProdotti.size();
+        return i;
+    }
+
+    // Metodo aggiuntivo per ottenere un prodotto per nome
+    public Prodotto getProdottoByName(String nomeProdotto) {
+        for (Prodotto prodotto : listaProdotti) {
+            if (prodotto.getNomeProdotto().equals(nomeProdotto)) {
+                return prodotto;
+            }
+        }
+        return null;
+    }
+
+    public int getTotaleQuantitaProdotti() {
+        int totaleQuantita = 0;
+        for (int quantita : quantitaProdotti) {
+            totaleQuantita += quantita;
+        }
+        return totaleQuantita;
+    }
+
 }

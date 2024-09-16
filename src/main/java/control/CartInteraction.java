@@ -16,47 +16,34 @@ import java.sql.SQLException;
 @WebServlet("/CartInteraction")
 public class CartInteraction extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Recupera i parametri dalla richiesta
-        String nomeProdotto = req.getParameter("nome");
-        String quantitaStr = req.getParameter("quantity"); // Cambiato a "quantity"
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String prodottoNome = request.getParameter("nome");
+        String quantitaStr = request.getParameter("quantity");
+        int quantita = Integer.parseInt(quantitaStr);
 
-        // Converte la quantità da stringa a intero (gestendo possibili errori)
-        int quantita = 1; // Valore predefinito nel caso in cui ci siano errori
-        try {
-            quantita = Integer.parseInt(quantitaStr);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            // Gestione dell'errore (opzionale)
-        }
-
-        ProdottoDao prodottoDao = new ProdottoDao();
-        Prodotto prodotto = null;
-
-        try {
-            prodotto = prodottoDao.doRetrieveByName(nomeProdotto);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (prodotto == null) {
-            System.out.println("Prodotto non trovato");
-            return;
-        }
-
-        // Recupera o crea il carrello dalla sessione
-        HttpSession session = req.getSession();
+        // Recupera il carrello dalla sessione
+        HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-
         if (cart == null) {
             cart = new Cart();
             session.setAttribute("cart", cart);
         }
 
-        // Aggiunge o aggiorna la quantità del prodotto nel carrello
-        cart.addProdotto(prodotto, quantita); // Aggiorna la quantità correttamente
+        // Crea un'istanza di ProdottoDao e recupera il prodotto
+        ProdottoDao prodottoDao = new ProdottoDao();
+        Prodotto prodotto = null;
+        try {
+            prodotto = prodottoDao.doRetrieveByName(prodottoNome);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        // Reindirizza alla pagina del carrello
-        resp.sendRedirect(req.getContextPath() + "/common/cart.jsp");
+        if (prodotto != null) {
+            // Aggiungi il prodotto al carrello
+            cart.addProdotto(prodotto, quantita);
+        }
+
+        // Reindirizza a una pagina di conferma o al carrello
+        response.sendRedirect(request.getContextPath() + "/common/cart.jsp");
     }
 }
