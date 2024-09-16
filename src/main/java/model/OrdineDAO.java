@@ -130,11 +130,9 @@ public class OrdineDAO implements OrdineDAOInterface {
         }
     }
 
-    
-
     @Override
-    public Ordine selectUserOrder(String userName, String email) throws SQLException {
-        Ordine ordine = null;
+    public ArrayList<Ordine> selectUserOrder(String userName, String email) throws SQLException {
+        ArrayList<Ordine> ordini = new ArrayList<>();
 
         // Usa un try-with-resources per gestire la connessione e la query
         try (Connection connection = getConnection();
@@ -147,8 +145,8 @@ public class OrdineDAO implements OrdineDAOInterface {
             // Esegui la query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Se esiste un ordine, lo recuperiamo
-            if (rs.next()) {
+            // Itera sui risultati della query e aggiungi gli ordini alla lista
+            while (rs.next()) {
                 String orderID = rs.getString("orderID");
                 String dataOrdine = rs.getString("dataOrdine");
                 String cognomeCliente = rs.getString("cognomeCliente");
@@ -157,13 +155,15 @@ public class OrdineDAO implements OrdineDAOInterface {
                 double totale = rs.getDouble("totale");
                 boolean stato = rs.getBoolean("stato");
 
-                // Crea un nuovo oggetto Ordine
-                ordine = new Ordine(orderID, dataOrdine, userName, cognomeCliente, cap, indirizzoDiConsegna, totale, stato);
+                // Crea un nuovo oggetto Ordine e aggiungilo alla lista
+                Ordine ordine = new Ordine(orderID, dataOrdine, userName, cognomeCliente, cap, indirizzoDiConsegna, totale, stato);
+                ordini.add(ordine);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return ordine;
+        // Restituisce la lista di ordini
+        return ordini;
     }
 }

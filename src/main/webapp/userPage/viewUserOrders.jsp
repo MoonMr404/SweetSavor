@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Ordine" %>
 <%@ page import="model.OrdineDAO" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -14,10 +15,13 @@
 <div class="card-section">
     <h1>I miei ordini</h1>
     <%
-        OrdineDAO ordineDAO = new OrdineDAO();
-        ArrayList<Ordine> listaOrdini = ordineDAO
 
-        if (!listaOrdini.isEmpty()) {
+        User user = (User) session.getAttribute("user"); 
+        OrdineDAO ordineDAO = new OrdineDAO();
+        ArrayList<Ordine> listaOrdini = (ArrayList<Ordine>) ordineDAO.selectUserOrder(user.getUsername(), user.getEmail());
+        
+        
+        if (!listaOrdini.isEmpty() {
             for (Ordine ordine : listaOrdini) {
 
     %>
