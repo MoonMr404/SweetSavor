@@ -2,13 +2,14 @@ package model;
 
 public class Prodotto {
     private String nomeProdotto;
-    private String descrizione;//max chars
+    private String descrizione; // max chars
     private double prezzo;
-    private int disponibility; //e quantità disponibile
+    private int disponibility; // quantità disponibile
     private boolean disponibile;
     private String categoria;
     private byte[] img;
 
+    // Costruttore con parametri
     public Prodotto(String nomeProdotto, String descrizione, double prezzo, int disponibility, boolean disponibile, String categoria, byte[] img) {
         this.nomeProdotto = nomeProdotto;
         this.descrizione = descrizione;
@@ -19,9 +20,10 @@ public class Prodotto {
         this.img = img;
     }
 
-    public Prodotto() {
-        
-    }
+    // Costruttore vuoto
+    public Prodotto() {}
+
+    // Getter e setter per ogni attributo
 
     public String getNomeProdotto() {
         return nomeProdotto;
@@ -38,7 +40,7 @@ public class Prodotto {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    
+
     public double getPrezzo() {
         return prezzo;
     }
@@ -46,13 +48,14 @@ public class Prodotto {
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
-    
+
+    public int getDisponibility() {
+        return disponibility;
+    }
 
     public void setDisponibility(int disponibility) {
-        if(disponibility == 0) {
-            this.disponibile = false;
-        }
         this.disponibility = disponibility;
+        this.disponibile = disponibility > 0; // Se la disponibilità è 0, il prodotto non è disponibile
     }
 
     public boolean isDisponibile() {
@@ -63,7 +66,6 @@ public class Prodotto {
         this.disponibile = disponibile;
     }
 
-   
     public String getCategoria() {
         return categoria;
     }
@@ -80,7 +82,8 @@ public class Prodotto {
         this.img = img;
     }
 
-    public int getDisponibility() {
-        return disponibility;
+    // Metodo aggiuntivo: Restituisce la quantità disponibile
+    public int getQuantita() {
+        return this.disponibility;
     }
 }

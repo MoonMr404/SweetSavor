@@ -11,6 +11,8 @@ public class Cart {
         listaProdotti = new ArrayList<>();
         quantitaProdotti = new ArrayList<>();
     }
+    
+    
 
     public boolean isEmpty(){
         return listaProdotti.isEmpty();
