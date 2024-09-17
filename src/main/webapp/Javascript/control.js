@@ -36,18 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function checkLoginStatus() {
-    var loginLogoutArea = document.getElementById('loginLogoutArea');
-    var isLoggedIn = session.getAttribute("currentSessionUser") != null; // Verifica se l'utente è loggato
-
-    if (isLoggedIn) {
-        // Mostra il pulsante di logout
-        loginLogoutArea.innerHTML = '<button onclick="logout()">Logout</button>';
-    } else {
-        // Mostra il pulsante di login
-        loginLogoutArea.innerHTML = '<button onclick="location.href=\'<%= request.getContextPath() %>/login.jsp\'">Login</button>';
-    }
-}
 
 // Funzione per eseguire il logout
 function logout() {

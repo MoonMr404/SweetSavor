@@ -6,14 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
-
-    User user = (User) request.getSession().getAttribute("user");
-    if (user == null) {
-        // Reindirizza l'utente alla pagina di login se non è autenticato
-        response.sendRedirect(request.getContextPath() + "/common/login.jsp");
-        return; // Assicurati di fermare l'esecuzione del codice dopo il reindirizzamento
-    }
-    // Istanziazione del DAO e recupero della lista di prodotti
+        // Istanziazione del DAO e recupero della lista di prodotti
     ArrayList<Prodotto> listaProdotti = null;
     ProdottoDao prodottoDao = new ProdottoDao();
 

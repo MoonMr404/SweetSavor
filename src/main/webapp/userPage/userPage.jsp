@@ -1,12 +1,7 @@
 <%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    User user = (User) request.getSession().getAttribute("user");
-    if (user == null) {
-        // Reindirizza l'utente alla pagina di login se non è autenticato
-        response.sendRedirect(request.getContextPath() + "/common/login.jsp");
-        return; // Assicurati di fermare l'esecuzione del codice dopo il reindirizzamento
-    }
+ 
 %>
 
 
@@ -16,7 +11,7 @@
     <title>User Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admiìn.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/userPage.css">
     <script src="<%=request.getContextPath()%>/Javascript/userPage.js"></script>
     
 </head>
