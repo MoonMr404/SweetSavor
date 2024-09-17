@@ -27,6 +27,6 @@ public class RemoveProductFromCart extends HttpServlet {
             }
         }
 
-        resp.sendRedirect(req.getContextPath() + "/common/cart.jsp");
+        resp.sendRedirect( "/common/cart.jsp");
     }
 }

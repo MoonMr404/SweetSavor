@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -22,7 +21,6 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Validazione base (opzionale)
         if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/common/login.jsp?error=emptyfields");
             return;
@@ -33,26 +31,25 @@ public class LoginServlet extends HttpServlet {
             UserDao userDao = new UserDao();
             User user = userDao.retrieveUser(email, hashPassword(password));
 
-            
             if (user != null && validatePassword(password, user.getPassword())) {
-                // Verifica se l'utente è un admin
+                HttpSession session = request.getSession(true);
+                session.setAttribute("currentSessionUser", user);
+
+                // Ripristina il carrello se esiste nella sessione
+                Object cart = session.getAttribute("cart");
+                if (cart != null) {
+                    session.setAttribute("cart", cart);
+                }
+
                 if (user.isAmministratore()) {
-                    // Autenticazione riuscita per admin, reindirizza alla pagina admin.jsp
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("currentSessionUser", user);
                     response.sendRedirect(request.getContextPath() + "/adminPage/adminPage.jsp");
                 } else {
-                    // Autenticazione riuscita per utente non admin, reindirizza alla home page
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("currentSessionUser", user);
                     response.sendRedirect(request.getContextPath() + "/common/home.jsp");
                 }
             } else {
-                // Credenziali errate
                 response.sendRedirect(request.getContextPath() + "/common/login.jsp?error=invalid");
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
-            // Errore database
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/common/login.jsp?error=db");
         }
