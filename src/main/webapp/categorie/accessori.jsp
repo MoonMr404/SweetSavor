@@ -43,7 +43,6 @@
                 <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
                 <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
             </a>
-            <button class="main-add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
         </div>
         <%
             }

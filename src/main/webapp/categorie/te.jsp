@@ -48,7 +48,6 @@
             }
         } else {
         %>
-        <p class="main-no-products">Nessun prodotto disponibile al momento.</p>
         <%
             }
         %>

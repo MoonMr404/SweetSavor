@@ -40,7 +40,6 @@
                 <img src="data:image/jpeg;base64, <%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="productImage" />
                 <p><%= prodotto.getNomeProdotto() %></p>
                 <p><%= prodotto.getPrezzo() %>&euro;</p>
-                <button class="add-to-cart" onclick="addToCart()">Aggiungi al carrello</button>
             </a>
         </div>
         <%
