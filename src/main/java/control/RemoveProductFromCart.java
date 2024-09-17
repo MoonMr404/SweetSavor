@@ -19,7 +19,7 @@ public class RemoveProductFromCart extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (cart != null) {
-            String nomeProdotto = req.getParameter("nome");
+            String nomeProdotto = req.getParameter("nomeProdotto");
             Prodotto prodotto = cart.getProdottoByName(nomeProdotto);
 
             if (prodotto != null) {
@@ -27,6 +27,9 @@ public class RemoveProductFromCart extends HttpServlet {
             }
         }
 
-        resp.sendRedirect( "/common/cart.jsp");
+        // Aggiorna il carrello nella sessione
+        session.setAttribute("cart", cart);
+        
+        resp.sendRedirect( req.getContextPath() + "/common/cart.jsp");
     }
 }

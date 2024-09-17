@@ -47,9 +47,11 @@
                     <p>Prezzo: €<%= String.format("%.2f", prodotto.getPrezzo()) %></p>
 
                     <p class="availability">Disponibilità: <span class="in-stock">In Stock</span> <i class="fa-solid fa-check"></i></p>
-
+                    <form action="<%= request.getContextPath() %>/RemoveProductFromCart " method="post">
+                        <input type="hidden" name="nomeProdotto" value="<%= prodotto.getNomeProdotto() %>" />
+                        <button type="submit" class="remove-button">Rimuovi</button>
+                    </form>
                     <!-- Rimuovi prodotto (gestito con JavaScript) -->
-                    <button type="button" class="remove-button" onclick="removeProduct('<%= prodotto.getNomeProdotto() %>')">Rimuovi</button>
                 </div>
             </div>
             <% } %>
