@@ -52,6 +52,8 @@ public class Ordine {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         String formattedDateTime = currentDateTime.format(formatter);
+        
+        
         this.dataOrdine = formattedDateTime;
     }
 

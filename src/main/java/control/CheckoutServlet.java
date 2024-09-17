@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
@@ -35,6 +37,8 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
+           
+        
         Ordine ordine = new Ordine();
         ordine.setOrderID(generaOrderID());  // Imposta l'ID dell'ordine
         ordine.setDataOrdine();  // Imposta la data dell'ordine
@@ -56,7 +60,7 @@ public class CheckoutServlet extends HttpServlet {
         }
         
         
-        response.sendRedirect(request.getContextPath() + "/common/OrderSuccess.jsp");
+        response.sendRedirect(request.getContextPath() + "/common/checkout.jsp");
     }
 
     // Metodo per generare un ID ordine unico

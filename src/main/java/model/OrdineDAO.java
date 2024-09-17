@@ -12,7 +12,7 @@ public class OrdineDAO implements OrdineDAOInterface {
     private static final String DELETE_ORDINE_SQL = "DELETE FROM Ordini WHERE orderID = ?";
     private static final String UPDATE_ORDINE_SQL = "UPDATE Ordini SET dataOrdine = ?, nomeCliente = ?, cognomeCliente = ?, cap = ?, indirizzoDiConsegna = ?, totale = ?, stato = ? WHERE orderID = ?";
     private static final String SELECT_ORDINE_BY_USER = "SELECT orderID, dataOrdine, nomeCliente, cognomeCliente, cap, indirizzoDiConsegna, totale, stato FROM Ordini WHERE nomeCliente = ? AND email = ?";
-    
+
     protected Connection getConnection() {
         String jdbcURL = "jdbc:mysql://localhost:3306/SweetAndSavor";
         String jdbcUsername = "root";
@@ -32,16 +32,12 @@ public class OrdineDAO implements OrdineDAOInterface {
 
     @Override
     public void insertOrdine(Ordine ordine) throws SQLException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDateTime = currentDateTime.format(formatter);
-
-      
+  
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDINE_SQL)) {
             preparedStatement.setString(1, ordine.getOrderID());
-            preparedStatement.setString(2, formattedDateTime);
+            preparedStatement.setString(2, ordine.getDataOrdine()); // Usa il formato corretto
             preparedStatement.setString(3, ordine.getNomeCliente());
             preparedStatement.setString(4, ordine.getCognomeCliente());
             preparedStatement.setString(5, ordine.getCap());
@@ -53,7 +49,6 @@ public class OrdineDAO implements OrdineDAOInterface {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public Ordine selectOrdine(String orderID) {
@@ -134,18 +129,14 @@ public class OrdineDAO implements OrdineDAOInterface {
     public ArrayList<Ordine> selectUserOrder(String userName, String email) throws SQLException {
         ArrayList<Ordine> ordini = new ArrayList<>();
 
-        // Usa un try-with-resources per gestire la connessione e la query
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDINE_BY_USER)) {
 
-            // Imposta i parametri della query
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, email);
 
-            // Esegui la query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Itera sui risultati della query e aggiungi gli ordini alla lista
             while (rs.next()) {
                 String orderID = rs.getString("orderID");
                 String dataOrdine = rs.getString("dataOrdine");
@@ -155,7 +146,6 @@ public class OrdineDAO implements OrdineDAOInterface {
                 double totale = rs.getDouble("totale");
                 boolean stato = rs.getBoolean("stato");
 
-                // Crea un nuovo oggetto Ordine e aggiungilo alla lista
                 Ordine ordine = new Ordine(orderID, dataOrdine, userName, cognomeCliente, cap, indirizzoDiConsegna, totale, stato);
                 ordini.add(ordine);
             }
@@ -163,7 +153,6 @@ public class OrdineDAO implements OrdineDAOInterface {
             e.printStackTrace();
         }
 
-        // Restituisce la lista di ordini
         return ordini;
     }
 }
