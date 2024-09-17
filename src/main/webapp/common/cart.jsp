@@ -75,7 +75,6 @@
 </div>
 
 <jsp:include page="/fragments/footer.jsp" />
-<link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/fragments.css">
 
 
 </body>
