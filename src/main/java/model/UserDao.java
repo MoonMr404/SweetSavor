@@ -1,5 +1,7 @@
 package model;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,9 +153,19 @@ public class UserDao implements UserDaoInterface<User> {
         }
     }
 
-    // Metodo per hash della password (devi implementarlo se usi la criptografia)
-    private String hashPassword(String password) throws NoSuchAlgorithmException {
-        // Implementa qui la tua logica di hash
-        return password; // Placeholder
+    // Metodo per hash della password
+    private String hashPassword(String password) {
+        String hashString = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            hashString = "";
+            for (int i = 0; i < hash.length; i++) {
+                hashString += Integer.toString((hash[i] & 0xff) | 0x100, 16).substring(1, 3);
+            }
+        } catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return hashString;
     }
 }

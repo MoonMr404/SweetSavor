@@ -13,7 +13,7 @@
 <body>
 <div class="card-sector">
     <h2>Cambio Password</h2>
-    <form action="<%=request.getContextPath()%>/ChangePasswordServlet" method="post">
+    <form action="<%=request.getContextPath()%>/ChangeUserPasswordServlet" method="post">
         <label for="passwordAttuale">Inserire password attuale:</label><br>
         <input type="text" id="passwordAttuale" name="passwordAttuale" required><br>
         <label for="nuovaPassword">Inserire nuova password:</label><br>

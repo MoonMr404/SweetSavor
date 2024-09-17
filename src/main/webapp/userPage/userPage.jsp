@@ -1,15 +1,12 @@
-<!--  userPage.jps
-
-Pagine di area personale dell'utente che effettua il login.
-
-Funzioni:
--controllo dei suoi ordini;
--modifica della credenziali:
-     -email;
-     -password;
-     -username
--->
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    if(user == null){
+        //mandare al login
+        response.sendRedirect("<%=request.getContextPath()%>/common/login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -18,6 +15,7 @@ Funzioni:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admiìn.css">
     <script src="<%=request.getContextPath()%>/Javascript/userPage.js"></script>
+    
 </head>
 <body>
 <div class="header">
