@@ -51,12 +51,12 @@ public class LoginServlet extends HttpServlet {
                 }
             } else {
                 // Credenziali errate
-                response.sendRedirect(request.getContextPath() + "/common/login.jsp?error=invalid");
+                response.sendRedirect(request.getContextPath() + "/common/login.jsp");
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
             // Errore database
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/common/login.jsp?error=db");
+            response.sendRedirect(request.getContextPath() + "/common/login.jsp");
         }
     }
 

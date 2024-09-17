@@ -7,6 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/login.css" type="text/css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="<%= request.getContextPath() %>/Javascript/control.js"></script>
 </head>
 <body>
 <header>
@@ -20,12 +21,15 @@
         <div class="mailInput">
             <input type="text" placeholder="Email" id="email" name="email">
             <i class='bx bxs-envelope'></i>
+            <span class="error"></span> <!-- Span per il messaggio di errore -->
         </div>
 
         <div class="password">
             <input type="password" placeholder="Password" id="password" name="password">
             <i class='bx bxs-lock-alt'></i>
+            <span class="error"></span> <!-- Span per il messaggio di errore -->
         </div>
+
 
         <div class="not-registered">
             <p>Non hai un account? <a href="<%= request.getContextPath() %>/common/registration.jsp">Registrati</a></p>
@@ -56,7 +60,7 @@
     </div>
 </div>
 
-<script src="<%= request.getContextPath() %>/Javascript/control.js"></script> 
+ 
 
 </body>
 </html>

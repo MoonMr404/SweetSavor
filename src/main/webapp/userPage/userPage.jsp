@@ -2,11 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User user = (User) request.getSession().getAttribute("user");
-    if(user == null){
-        //mandare al login
-        response.sendRedirect("<%=request.getContextPath()%>/common/login.jsp");
+    if (user == null) {
+        // Reindirizza l'utente alla pagina di login se non è autenticato
+        response.sendRedirect(request.getContextPath() + "/common/login.jsp");
+        return; // Assicurati di fermare l'esecuzione del codice dopo il reindirizzamento
     }
 %>
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
