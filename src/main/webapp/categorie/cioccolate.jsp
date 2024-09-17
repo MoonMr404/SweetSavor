@@ -43,7 +43,7 @@
 
         <div class="main-product-item">
             <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
-<%--                <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150" alt="immagine non disponibile">--%>
+               <img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="150" alt="immagine non disponibile">
                 <p class="main-product-name"><%= prodotto.getNomeProdotto() %></p>
                 <p class="main-product-price"><%= String.format("%.2f",prodotto.getPrezzo())%> &euro;</p>
             </a>
