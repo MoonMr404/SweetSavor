@@ -60,7 +60,7 @@ public class CheckoutServlet extends HttpServlet {
         }
         
         
-        response.sendRedirect(request.getContextPath() + "/common/checkout.jsp");
+        response.sendRedirect(request.getContextPath() + "/common/ordineConfermato.jsp");
     }
 
     // Metodo per generare un ID ordine unico
