@@ -14,13 +14,13 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        // Rimuove l'utente dalla sessione
-        session.removeAttribute("currentSessionUser");
-
-        // Svuota il carrello
+        // Rimuovi solo il carrello dalla sessione se esiste
         session.removeAttribute("cart");
 
-        // Reindirizza alla home page
+        // Invalida la sessione
+        session.invalidate();
+
+        // Redirect to home page
         response.sendRedirect(request.getContextPath() + "/common/home.jsp");
     }
 
@@ -28,4 +28,3 @@ public class LogoutServlet extends HttpServlet {
         doGet(request, response);
     }
 }
-

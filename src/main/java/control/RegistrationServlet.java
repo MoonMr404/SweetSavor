@@ -54,7 +54,7 @@ public class RegistrationServlet extends HttpServlet {
         // Verifica se l'email esiste già
         try {
             if (userDao.emailExists(email)) {
-                showError(response, "L'email è già in uso");
+                response.sendRedirect(request.getContextPath() + "/common/registration.jsp");
                 return;
             }
 

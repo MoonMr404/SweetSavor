@@ -35,7 +35,7 @@
             <input type="password" placeholder="Password" id="password" name="password" required>
             <i class='bx bxs-lock-alt'></i>
         </div>
-
+                
         <p>Già registrato?<a href="login.jsp">Accedi</a></p>
 
         <div class="terms">

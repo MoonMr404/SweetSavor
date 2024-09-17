@@ -1,5 +1,6 @@
 package control;
 
+import model.Cart;
 import model.User;
 import model.UserDao;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -36,11 +38,13 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("currentSessionUser", user);
 
                 // Ripristina il carrello se esiste nella sessione
-                Object cart = session.getAttribute("cart");
-                if (cart != null) {
+                Cart cart = (Cart) session.getAttribute("cart");
+                if (cart == null) {
+                    cart = new Cart();
                     session.setAttribute("cart", cart);
                 }
 
+                // Redirect based on user role
                 if (user.isAmministratore()) {
                     response.sendRedirect(request.getContextPath() + "/adminPage/adminPage.jsp");
                 } else {

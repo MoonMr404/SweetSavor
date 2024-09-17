@@ -16,12 +16,12 @@
 <jsp:include page="/fragments/header.jsp"/>
 <%
     // Recupera il carrello dalla sessione
-    Cart cart = (Cart) request.getSession().getAttribute("cart");
+    Cart cart = (Cart) session.getAttribute("cart");
 
     // Se il carrello è null, inizializzalo
     if (cart == null) {
         cart = new Cart();
-        request.getSession().setAttribute("cart", cart);
+        request.setAttribute("cart", cart);
     }
     // Recupera la lista dei prodotti nel carrello
     ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) cart.getListaProdotti();
@@ -55,7 +55,6 @@
                         <input type="hidden" name="nomeProdotto" value="<%= prodotto.getNomeProdotto() %>" />
                         <button type="submit" class="remove-button">Rimuovi</button>
                     </form>
-                    <!-- Rimuovi prodotto (gestito con JavaScript) -->
                 </div>
             </div>
             <% } %>
