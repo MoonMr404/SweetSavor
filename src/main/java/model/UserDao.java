@@ -168,4 +168,21 @@ public class UserDao implements UserDaoInterface<User> {
         }
         return hashString;
     }
+
+
+
+    public boolean emailExists(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+        return false;
+    }
+
 }

@@ -25,8 +25,7 @@
     <div class="main-home-container">
         <!-- Showcase prodotti -->
         <%
-
-                        ArrayList<Prodotto> lista = null;
+            ArrayList<Prodotto> lista = null;
             lista = new ArrayList();
             ProdottoDao prodottoDao = new ProdottoDao();
             
