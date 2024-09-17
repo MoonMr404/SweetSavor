@@ -1,4 +1,4 @@
-/* Stile per il corpo della pagina */
+/* Stile globale per il corpo della pagina */
 body {
     background-color: #E6CCB2;
     margin: 0;
@@ -26,27 +26,126 @@ h1, p {
     padding: 20px 0;
 }
 
+/* Stile delle box prodotto */
+.product-main-box {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FAEDCD;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 7px solid black;
+    border-bottom: 10px solid black;
+    border-radius: 30px;
+}
 
+.grid-product-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
 
+/* Box immagine e contenuti */
+.image-box {
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    width: 100%;
+    height: auto;
+}
 
-/* Media Queries for Responsive Design */
+.productImage {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.user-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Interazione utente */
+.availability {
+    margin-top: 10px;
+}
+
+.in-stock {
+    color: green;
+}
+
+#check-i {
+    color: green;
+}
+
+#quantity {
+    width: 50px;
+}
+
+/* Bottone di acquisto */
+#buy-button {
+    background-color: #FAEDCD;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 7px solid black;
+    border-bottom: 9px solid black;
+    border-radius: 15px;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 6px;
+    transition-duration: 300ms;
+}
+
+#buy-button:hover {
+    background-color: #fce4a7;
+    color: black;
+    transform: scale(1.1);
+}
+
+.product-description {
+    margin-top: 20px;
+}
+
+.product-description p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Media Queries per design responsive */
 @media (max-width: 1024px) {
     body {
         padding: 20px;
     }
 
-    .image-container {
-        margin: 20px;
+    .product-main-box {
+        padding: 15px;
+        border-radius: 20px;
     }
 
-    .product-box {
-        width: 45%;
-        margin: 10px;
+    .grid-product-box {
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+        gap: 15px;
     }
 
     .productImage {
         width: 250px;
         height: 250px;
+    }
+
+    #buy-button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
@@ -55,19 +154,18 @@ h1, p {
         padding: 15px;
     }
 
-    .image-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-box {
-        width: 100%;
-        margin: 10px 0;
+    .grid-product-box {
+        grid-template-columns: 1fr;
     }
 
     .productImage {
         width: 200px;
         height: 200px;
+    }
+
+    #buy-button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
@@ -76,14 +174,14 @@ h1, p {
         padding: 10px;
     }
 
-    .image-container {
-        margin: 10px 0;
+    .grid-product-box {
+        padding: 5px;
+        gap: 10px;
     }
 
-    .product-box {
-        width: 100%;
-        margin: 10px 0;
-        padding: 5px;
+    .product-main-box {
+        padding: 10px;
+        border-radius: 10px;
     }
 
     .productImage {
@@ -91,11 +189,16 @@ h1, p {
         height: 150px;
     }
 
-    .product-box h2 {
-        font-size: 16px;
+    #buy-button {
+        font-size: 12px;
+        padding: 6px 12px;
     }
 
-    .product-box p {
+    #quantity {
+        width: 40px;
+    }
+
+    .product-description p {
         font-size: 14px;
     }
 }

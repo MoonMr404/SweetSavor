@@ -18,8 +18,11 @@
     // Recupera il carrello dalla sessione
     Cart cart = (Cart) request.getSession().getAttribute("cart");
 
-    // Se il carrello è vuoto, inizializzalo
-    
+    // Se il carrello è null, inizializzalo
+    if (cart == null) {
+        cart = new Cart();
+        request.getSession().setAttribute("cart", cart);
+    }
     // Recupera la lista dei prodotti nel carrello
     ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) cart.getListaProdotti();
 
@@ -39,6 +42,7 @@
                 int quantitaProdotto = cart.getQuantita(prodotto); // Ottieni la quantità del prodotto
             %>
             <div class="product-item">
+                <a href="<%= request.getContextPath() %>/categorie/prodotto.jsp?nome=<%=prodotto.getNomeProdotto() %>">
                 <div class="image-box">
                     <img src="data:image/jpeg;base64,<%= new String(java.util.Base64.getEncoder().encode(prodotto.getImg())) %>" height="100">
                 </div>
