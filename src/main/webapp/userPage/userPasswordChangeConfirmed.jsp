@@ -9,7 +9,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="../CSS/cart.css">
     <script src="../Javascript/cart.js" defer></script>
-    <%@ include file="../fragments/header.jsp" %>
+    <jsp:include page="<%= request.getContextPath() %>/fragments/header.jsp"/>
 </head>
 <body>
 
@@ -17,8 +17,7 @@
     <p><i>La tua password è stata modificata correttamente.</i></p>
 </div>
 
-<%@ include file="../fragments/footer.jsp" %>
-<style><%@ include file="../CSS/fragments.css" %></style>
+<jsp:include page="../fragments/footer.jsp" />
 
 <script src="/Javascript/cart.js" >
 
