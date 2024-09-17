@@ -23,6 +23,8 @@
     <title>SweetSavor</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/productPage.css">
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="<%= request.getContextPath() %>/Javascript/loginStatus.js"></script>
 </head>
