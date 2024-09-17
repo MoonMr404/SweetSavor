@@ -15,6 +15,7 @@ import java.sql.SQLException;
 public class CheckoutServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         // Recupera i dati dal modulo
         String firstName = request.getParameter("first-name");
         String lastName = request.getParameter("last-name");
