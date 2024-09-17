@@ -43,7 +43,7 @@
 
         <div class="product-box">
             <div class="image-box">
-                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" >
+                <img class="mySlides" src="data:image/jpeg;base64,<%= imgBase64 %>" width="300">
             </div>
 
             <div class="user-box">

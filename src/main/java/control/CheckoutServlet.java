@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
 
@@ -37,8 +34,6 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-           
-        
         Ordine ordine = new Ordine();
         ordine.setOrderID(generaOrderID());  // Imposta l'ID dell'ordine
         ordine.setDataOrdine();  // Imposta la data dell'ordine
@@ -51,16 +46,20 @@ public class CheckoutServlet extends HttpServlet {
 
         OrdineDAO dao = new OrdineDAO();
         try {
-            // Rimuove il carrello dalla sessione
+            // Rimuove solo il carrello dalla sessione
             request.getSession().removeAttribute("cart");
-            
+
             dao.insertOrdine(ordine);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        
-        
-        response.sendRedirect(request.getContextPath() + "/common/ordineConfermato.jsp");
+
+        // Verifica se l'utente è loggato e mantiene la sessione
+        if (request.getSession().getAttribute("user") != null) {
+            response.sendRedirect(request.getContextPath() + "/common/ordineConfermato.jsp");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/common/login.jsp");
+        }
     }
 
     // Metodo per generare un ID ordine unico
@@ -68,8 +67,4 @@ public class CheckoutServlet extends HttpServlet {
         return "ORD-" + System.currentTimeMillis(); // Semplice generatore di ID basato sul timestamp
     }
 
-    // Metodo per ottenere la data corrente
-    private String getCurrentDate() {
-        return java.time.LocalDateTime.now().toString(); // Formattato come stringa
-    }
 }
