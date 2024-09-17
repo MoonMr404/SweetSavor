@@ -11,7 +11,8 @@ public interface UserDaoInterface<T> {
     public List<T> retrieveAll() throws SQLException;
     public boolean updateUserInfo(String email,String oldPassword, String newUsername, String newPassword) throws SQLException;
 
-    boolean verifyPassword(String email, String passwordAttuale) throws SQLException, NoSuchAlgorithmException;
+    public boolean verifyPassword(String email, String passwordAttuale) throws SQLException, NoSuchAlgorithmException;
 
-    void updatePassword(String email, String nuovaPassword) throws SQLException, NoSuchAlgorithmException;
+    public void updatePassword(String email, String nuovaPassword) throws SQLException, NoSuchAlgorithmException;
+
 }

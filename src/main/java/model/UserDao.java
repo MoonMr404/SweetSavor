@@ -168,7 +168,8 @@ public class UserDao implements UserDaoInterface<User> {
         }
         return hashString;
     }
-
+    
+   
 
 
     public boolean emailExists(String email) throws SQLException {
