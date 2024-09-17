@@ -4,7 +4,6 @@
  
 %>
 
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -16,19 +15,20 @@
     
 </head>
 <body>
-<div class="header">
-    <h1>Area Personale</h1>
-</div>
+
 <div class="container">
-    <div class="sidebar">
-        <a href="<%= request.getContextPath() %>/userPage/viewUserOrders.jsp" class="sidebar-link" data-url="viewUserOrders.jsp">I tuoi ordini</a>
-        <a href="<%= request.getContextPath() %>/userPage/userUsernameChange.jsp" class="sidebar-link" data-url="userUsernameChange.jsp">Modifica il tuo username</a>
-        <a href="<%= request.getContextPath() %>/userPage/userPasswordChange.jsp" class="sidebar-link" data-url="userPasswordChange.jsp"> Modifica la tua password</a>
-        <a href="<%= request.getContextPath() %>/LogoutServlet" >Logout</a>
+    <div class="content">
+        <ul>   
+            <div class="header">
+                <h1>Area Personale</h1>
+            </div>
+            <li><a href="<%= request.getContextPath() %>/userPage/viewUserOrders.jsp" class="sidebar-link" data-url="viewUserOrders.jsp">I tuoi ordini</a></li>
+            <li><a href="<%= request.getContextPath() %>/userPage/userUsernameChange.jsp" class="sidebar-link" data-url="userUsernameChange.jsp">Modifica il tuo username</a></li>
+            <li><a href="<%= request.getContextPath() %>/userPage/userPasswordChange.jsp" class="sidebar-link" data-url="userPasswordChange.jsp"> Modifica la tua password</a></li>
+            <li><a href="<%= request.getContextPath() %>/LogoutServlet">Logout</a></li>
+        </ul>
     </div>
-    <div class="main" id="content">
-        <!-- area per il contenuto dinamico -->
-    </div>
+ 
 </div>
 
 </body>

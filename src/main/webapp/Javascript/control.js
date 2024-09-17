@@ -1,5 +1,4 @@
 // Questo codice viene salvato nel file form-validation.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const forms = document.querySelectorAll('.product-form, .contact-form');
 
@@ -33,23 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
-
-
-
-
-// Funzione per eseguire il logout
-function logout() {
-    // Effettua il logout inviando una richiesta GET a LogoutServlet
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<%= request.getContextPath() %>/LogoutServlet', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Reindirizza alla pagina di login dopo il logout
-            window.location.href = '<%= request.getContextPath() %>/common/login.jsp';
-        }
-    };
-    xhr.send();
-}
 
 
 
