@@ -33,16 +33,17 @@ public class OrdineDAO implements OrdineDAOInterface {
     @Override
     public void insertOrdine(Ordine ordine) throws SQLException {
         LocalDateTime currentDateTime = LocalDateTime.now();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
         String formattedDateTime = currentDateTime.format(formatter);
-        
+
+        if (ordine.getNomeCliente() == null) {
+            throw new IllegalArgumentException("Nome Cliente cannot be null");
+        }
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDINE_SQL)) {
             preparedStatement.setString(1, ordine.getOrderID());
-            //preparedStatement.setString(2, formattedDateTime);
-            preparedStatement.setString(2, ordine.getDataOrdine());
+            preparedStatement.setString(2, formattedDateTime);
             preparedStatement.setString(3, ordine.getNomeCliente());
             preparedStatement.setString(4, ordine.getCognomeCliente());
             preparedStatement.setString(5, ordine.getCap());
@@ -54,6 +55,7 @@ public class OrdineDAO implements OrdineDAOInterface {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public Ordine selectOrdine(String orderID) {

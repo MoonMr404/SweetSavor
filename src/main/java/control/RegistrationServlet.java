@@ -26,7 +26,6 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String username = request.getParameter("username");
@@ -36,9 +35,9 @@ public class RegistrationServlet extends HttpServlet {
             showError(response, "L'username non può essere vuoto");
             return;
         }
-
-        User user = new User(nome, password, email, false); // Assumi isAdmin a false
-        user.setUsername(username);
+        username.trim();
+        email.trim();
+        User user = new User(username, password, email, false); // Assumi isAdmin a false
 
         try {
             userDao.doSave(user);

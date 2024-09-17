@@ -33,8 +33,6 @@ public class LoginServlet extends HttpServlet {
             UserDao userDao = new UserDao();
             User user = userDao.retrieveUser(email, hashPassword(password));
 
-            //Stampa della password
-            System.out.println(hashPassword(password));
             
             if (user != null && validatePassword(password, user.getPassword())) {
                 // Verifica se l'utente è un admin
