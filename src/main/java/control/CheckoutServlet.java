@@ -33,7 +33,7 @@ public class CheckoutServlet extends HttpServlet {
         if (cart != null) {
             totale = cart.getTotalPrice();
         } else {
-            response.sendRedirect(request.getContextPath() + "/cart"); // Reindirizza al carrello se vuoto
+            response.sendRedirect(request.getContextPath() + "/common/cart.jsp"); // Reindirizza al carrello se vuoto
             return;
         }
 

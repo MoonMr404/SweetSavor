@@ -19,11 +19,7 @@
     Cart cart = (Cart) request.getSession().getAttribute("cart");
 
     // Se il carrello è vuoto, inizializzalo
-    if (cart == null) {
-        cart = new Cart();
-        request.getSession().setAttribute("cart", cart);
-    }
-
+    
     // Recupera la lista dei prodotti nel carrello
     ArrayList<Prodotto> listaProdotti = (ArrayList<Prodotto>) cart.getListaProdotti();
 
@@ -38,7 +34,7 @@
         <h2>Carrello</h2>
 
         <!-- Modulo per il checkout -->
-        <form action="<%=request.getContextPath()%>/CheckoutServlet" method="post" id="cart-form">
+        
             <% for (Prodotto prodotto : listaProdotti) {
                 int quantitaProdotto = cart.getQuantita(prodotto); // Ottieni la quantità del prodotto
             %>
@@ -57,8 +53,7 @@
                 </div>
             </div>
             <% } %>
-            <button type="submit" id="checkout-button">Procedi al Pagamento</button>
-        </form>
+            <a href="<%= request.getContextPath() %>/common/checkout.jsp"><button id="checkout-button">Procedi al Pagamento</button></a>
     </div>
 
     <div class="checkout-box">
