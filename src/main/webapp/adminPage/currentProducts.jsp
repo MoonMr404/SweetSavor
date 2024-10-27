@@ -5,6 +5,21 @@
 <%@ page import="model.ProdottoDaoInterface" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.Base64" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+    // Controlla se l'utente è autenticato come admin
+    HttpSession sessionAdmin = request.getSession(false);
+    Boolean isAdmin = (sessionAdmin != null) ? (Boolean) sessionAdmin.getAttribute("isAdmin") : false;
+
+    if (isAdmin == null || !isAdmin) {
+        // Reindirizza alla pagina di login se non è autenticato
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>

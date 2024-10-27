@@ -1,6 +1,17 @@
-<!-- admin.jsp 
-Check if logged
--->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+    // Controlla se l'utente è autenticato come admin
+    HttpSession sessionAdmin = request.getSession(false);
+    Boolean isAdmin = (sessionAdmin != null) ? (Boolean) sessionAdmin.getAttribute("isAdmin") : false;
+
+    if (isAdmin == null || !isAdmin) {
+        // Reindirizza alla pagina di login se non è autenticato
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="it">
