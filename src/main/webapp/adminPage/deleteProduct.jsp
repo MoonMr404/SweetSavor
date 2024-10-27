@@ -4,6 +4,8 @@
 <%@ page import="model.ProdottoDao" %>
 <%@ page import="model.ProdottoDaoInterface" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.Base64" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -11,7 +13,6 @@
     <title>Elimina Prodotti</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/admin.css">
-    
 </head>
 <body>
 <div class="card section">
@@ -27,6 +28,16 @@
             e.printStackTrace();
         }
 
+        // Messaggio di conferma per l'eliminazione
+        String deletionMessage = request.getParameter("deletionMessage");
+        if (deletionMessage != null) {
+    %>
+    <h3 style="color: green; text-align: center;"><%= deletionMessage %></h3>
+    <%
+        }
+    %>
+
+    <%
         if (listaProdotti != null && !listaProdotti.isEmpty()) {
     %>
 
@@ -35,6 +46,7 @@
         <tr>
             <th>Nome del Prodotto</th>
             <th>Prezzo</th>
+            <th>Anteprima</th>
             <th>Azione</th>
         </tr>
         </thead>
@@ -46,6 +58,7 @@
         <tr>
             <td><%= prodotto.getNomeProdotto() %></td>
             <td><%= prodotto.getPrezzo() %>€</td>
+            <td><img src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(prodotto.getImg())) %>" class="main-productImage" width="100"></td>
             <td>
                 <form action="<%= request.getContextPath() %>/AdminDeleteProductServlet" method="post">
                     <input type="hidden" name="nomeProdotto" value="<%= prodotto.getNomeProdotto() %>">
@@ -62,33 +75,8 @@
     <%
     } else {
     %>
-    <h3>Nessun prodotto disponibile.</h3>
+    <h3 style="text-align: center;">Nessun prodotto disponibile.</h3>
     <%
-        }
-    %>
-
-    <%
-        // Gestione dell'eliminazione dei prodotti
-        String nomeProdotto = request.getParameter("nomeProdotto");
-
-        if (nomeProdotto != null && !nomeProdotto.trim().isEmpty()) {
-            try {
-                boolean deleted = prodottoDao.doDelete(nomeProdotto);
-                if (deleted) {
-    %>
-    <h3>Prodotto eliminato con successo.</h3>
-    <%
-    } else {
-    %>
-    <h3>Prodotto non trovato.</h3>
-    <%
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    %>
-    <h3>Si è verificato un errore durante l'eliminazione del prodotto.</h3>
-    <%
-            }
         }
     %>
 </div>
