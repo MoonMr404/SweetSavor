@@ -167,12 +167,12 @@
         <form action="<%= request.getContextPath() %>/CheckoutServlet" method="post">
             <div class="form-group">
                 <label for="first-name">Nome:</label>
-                <input type="text" id="first-name" name="first-name" required pattern="[A-Za-z]+" title="Inserisci solo lettere" onblur="validateName('first-name')">
+                <input type="text" id="first-name" name="first-name" required pattern="[A-Za-z]+" title="Inserisci solo lettere" placeholder="Nome" onblur="validateName('first-name')">
                 <span id="first-name-error" class="error-message" style="display:none; color: red;"></span>
             </div>
             <div class="form-group">
                 <label for="last-name">Cognome:</label>
-                <input type="text" id="last-name" name="last-name" required pattern="[A-Za-z]+" title="Inserisci solo lettere" onblur="validateName('last-name')">
+                <input type="text" id="last-name" name="last-name" required pattern="[A-Za-z]+" title="Inserisci solo lettere" placeholder="Cognome" onblur="validateName('last-name')">
                 <span id="last-name-error" class="error-message" style="display:none; color: red;"></span>
             </div>
             <div class="form-group">
@@ -182,39 +182,39 @@
             </div>
             <div class="form-group">
                 <label for="address">Indirizzo:</label>
-                <input type="text" id="address" name="address" required pattern="^[A-Za-z0-9\s,.-]{5,100}$" title="L'indirizzo deve includere solo lettere, numeri, virgole, punti e trattini." onblur="validateAddress()">
+                <input type="text" id="address" name="address" required pattern="^[A-Za-z0-9\s,.-]{5,100}$" title="L'indirizzo deve includere solo lettere, numeri, virgole, punti e trattini." placeholder="es. Via della Pace, N23" onblur="validateAddress()">
                 <span id="address-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 
             <div class="form-group">
                 <label for="city">Città:</label>
-                <input type="text" id="city" name="city" required pattern="^[A-Za-z\s]{2,50}$" title="La città deve contenere solo lettere e spazi." onblur="validateCity()">
+                <input type="text" id="city" name="city" required pattern="^[A-Za-z\s]{2,50}$" title="La città deve contenere solo lettere e spazi." placeholder="es. Napoli" onblur="validateCity()">
                 <span id="city-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 
             <div class="form-group">
                 <label for="postal-code">CAP:</label>
-                <input type="text" id="postal-code" name="postal-code" required pattern="^\d{5}$" title="Il CAP deve contenere esattamente 5 cifre." onblur="validatePostalCode()">
+                <input type="text" id="postal-code" name="postal-code" required pattern="^\d{5}$" title="Il CAP deve contenere esattamente 5 cifre." placeholder="es. 00000" onblur="validatePostalCode()">
                 <span id="postal-code-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 
             <div class="form-group">
                 <label for="country">Paese:</label>
-                <input type="text" id="country" name="country" required pattern="^[A-Za-z\s]{2,50}$" title="Il paese deve contenere solo lettere e spazi." onblur="validateCountry()">
+                <input type="text" id="country" name="country" required pattern="^[A-Za-z\s]{2,50}$" title="Il paese deve contenere solo lettere e spazi." placeholder="es. Italia" onblur="validateCountry()">
                 <span id="country-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 
 
             <h2>Dettagli di Pagamento</h2>
             <div class="form-group">
-                <label for="card-name">Nome sulla Carta:</label>
-                <input type="text" id="card-name" name="card-name" required pattern="^[A-Za-z\s]{2,50}$" title="Il nome sulla carta deve contenere solo lettere e spazi." onblur="validateCardName()">
+                <label for="card-name">Nome <i>titolare</i> della carta:</label>
+                <input type="text" id="card-name" name="card-name" required pattern="^[A-Za-z\s]{2,50}$" title="Il nome sulla carta deve contenere solo lettere e spazi." placeholder="Nome Cognome" onblur="validateCardName()">
                 <span id="card-name-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 
             <div class="form-group">
                 <label for="card-number">Numero di Carta:</label>
-                <input type="text" id="card-number" name="card-number" required pattern="\d{16}" maxlength="16" title="Inserisci un numero di carta valido di 16 cifre" onblur="validateCardNumber()">
+                <input type="text" id="card-number" name="card-number" required pattern="\d{16}" maxlength="16" title="Inserisci un numero di carta valido di 16 cifre" placeholder="XXXXXXXXXXXXXXXX" onblur="validateCardNumber()">
                 <span id="card-number-error" class="error-message" style="display:none; color: red;"></span>
             </div>
             <div class="form-group">
@@ -225,7 +225,7 @@
 
             <div class="form-group">
                 <label for="cvv">CVV:</label>
-                <input type="text" id="cvv" name="cvv" required pattern="\d{3}" maxlength="3" title="Inserisci un CVV valido di 3 cifre" onblur="validateCVV()">
+                <input type="text" id="cvv" name="cvv" required pattern="\d{3}" maxlength="3" title="Inserisci un CVV valido di 3 cifre" placeholder="XXX" onblur="validateCVV()">
                 <span id="cvv-error" class="error-message" style="display:none; color: red;"></span>
             </div>
 

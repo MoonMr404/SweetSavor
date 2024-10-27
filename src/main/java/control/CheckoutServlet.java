@@ -65,12 +65,12 @@ public class CheckoutServlet extends HttpServlet {
         }
 
         if (!cardNamePattern.matcher(cardName).matches()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Nome sulla carta non valido.");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Nome titolare non valido.");
             return;
         }
 
         if (!cardNumberPattern.matcher(cardNumber).matches()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Numero di carta non valido.");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Numero carta non valido.");
             return;
         }
 
