@@ -12,14 +12,10 @@
 </head>
 <body>
 
-
 <h2 style="text-align: center">Lista Ordini</h2>
 
 <!-- Form di ricerca -->
 <form method="get" action="viewOrders.jsp" style="text-align: center; margin-bottom: 20px;">
-    <label for="searchOrderID">Cerca per ID Ordine:</label>
-    <input type="text" id="searchOrderID" name="searchOrderID" placeholder="Inserisci ID Ordine"
-           value="<%= request.getParameter("searchOrderID") != null ? request.getParameter("searchOrderID") : "" %>">
 
     <label for="searchCustomerName">Cerca per Cliente:</label>
     <input type="text" id="searchCustomerName" name="searchCustomerName" placeholder="Inserisci Nome Cliente"
@@ -35,13 +31,9 @@
         ArrayList<Ordine> listaOrdini = ordineDAO.selectAllOrdini();
 
         // Recupera i parametri di ricerca
-        String searchOrderID = request.getParameter("searchOrderID");
         String searchCustomerName = request.getParameter("searchCustomerName");
 
         // Filtra la lista di ordini se sono stati forniti parametri di ricerca
-        if (searchOrderID != null && !searchOrderID.isEmpty()) {
-            listaOrdini.removeIf(ordine -> !ordine.getOrderID().contains(searchOrderID));
-        }
         if (searchCustomerName != null && !searchCustomerName.isEmpty()) {
             listaOrdini.removeIf(ordine ->
                     !(ordine.getNomeCliente().toLowerCase().contains(searchCustomerName.toLowerCase()) ||
